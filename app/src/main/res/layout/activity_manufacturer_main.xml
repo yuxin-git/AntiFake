@@ -32,7 +32,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton_edit"
+                android:id="@+id/imageButton_authentication"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
