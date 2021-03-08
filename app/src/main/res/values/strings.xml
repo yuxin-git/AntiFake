@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">商品防伪认证系统</string>
+    <string name="tab_text_1">品牌商</string>
+    <string name="tab_text_2">生产商</string>
+    <string name="tab_text_3">经销商</string>
+    <string name="text_1">账户</string>
+    <string name="text_2">密钥</string>
+    <string name="text_3">登录</string>
+</resources>
