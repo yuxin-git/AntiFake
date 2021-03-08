@@ -47,7 +47,8 @@
         android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/editTextID"
         app:layout_constraintStart_toEndOf="@+id/editTextID"
-        app:srcCompat="@drawable/ic_code_scanner" />
+        app:srcCompat="@drawable/ic_code_scanner"
+        tools:ignore="VectorDrawableCompat" />
 
     <Button
         android:id="@+id/button_search"
