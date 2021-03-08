@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".BrandMainActivity">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="品牌商"
+        tools:layout_editor_absoluteX="202dp"
+        tools:layout_editor_absoluteY="217dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

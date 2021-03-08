@@ -16,7 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.antifake.BrandMainActivity;
+import com.example.antifake.DealerMainActivity;
 import com.example.antifake.MainActivity;
+import com.example.antifake.ManufacturerMainActivity;
 import com.example.antifake.R;
 import android.view.View;
 
@@ -30,7 +32,6 @@ public class PlaceholderFragment extends Fragment {
     private PageViewModel pageViewModel;
 
     private Button btn=null;
-    private Button btnTest=null;
 
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
@@ -70,18 +71,25 @@ public class PlaceholderFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),BrandMainActivity.class);
-                startActivity(intent);
+                int activity_index=getArguments().getInt(ARG_SECTION_NUMBER);
+                switch (activity_index){
+                    case 1:
+                        Intent intent1=new Intent(getActivity(),BrandMainActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case 2:
+                        Intent intent2=new Intent(getActivity(), ManufacturerMainActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case 3:
+                        Intent intent3=new Intent(getActivity(), DealerMainActivity.class);
+                        startActivity(intent3);
+                        break;
+
+                }
             }
         });
 
-        btnTest= root.findViewById(R.id.button_enter);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println(getArguments().getInt(ARG_SECTION_NUMBER));
-            }
-        });
         return root;
     }
 }
