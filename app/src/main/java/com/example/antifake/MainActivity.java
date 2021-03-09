@@ -25,7 +25,6 @@ import org.json.JSONObject;
 import java.util.logging.Level;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab_search);
-        // 引入之后使用new创建chainsql对象，之后使用chainsql对象进行接口操作
-        Chainsql c = new Chainsql();
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
+
 
 
 

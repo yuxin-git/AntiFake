@@ -12,7 +12,7 @@ import com.example.antifake.R;
 
 public class PageViewModel extends ViewModel {
 
-    private static final String[] TAB_TITLES = new String[]{"品牌商","生产商","经销商"};
+    private static final String[] TAB_TITLES = new String[]{"品牌商","生产商","经销商","监管机构"};
     private MutableLiveData<Integer> mIndex = new MutableLiveData<>();
     private LiveData<String> mText = Transformations.map(mIndex, new Function<Integer, String>() {
         @Override

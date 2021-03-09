@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextAccount"
+        android:id="@+id/editText_address"
         android:layout_width="264dp"
         android:layout_height="53dp"
         android:layout_marginStart="20dp"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/editText_secret"
         android:layout_width="264dp"
         android:layout_height="53dp"
         android:layout_marginStart="20dp"
@@ -61,7 +61,7 @@
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextAccount" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_address" />
 
     <Button
         android:id="@+id/button_enter"
@@ -72,7 +72,7 @@
         android:text="@string/text_3"
         android:textSize="27dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_secret" />
 
     <ImageView
         android:id="@+id/imageView2"

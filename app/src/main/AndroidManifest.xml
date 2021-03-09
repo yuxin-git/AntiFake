@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiFake">
-        <activity android:name=".dealer.ui.DealerInfRecordOfflineActivity"></activity>
+        <activity android:name=".regulator.ui.ReguInfRecordActivity"></activity>
+        <activity android:name=".regulator.RegulatorMainActivity" />
+        <activity android:name=".dealer.ui.DealerInfRecordOfflineActivity" />
         <activity android:name=".dealer.ui.DealerInventorySearchActivity" />
         <activity android:name=".dealer.ui.DealerInfRecordInetActivity" />
         <activity android:name=".manufacturer.ui.ManuInventorySearchActivity" />

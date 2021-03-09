@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -14,10 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.antifake.regulator.RegulatorMainActivity;
 import com.example.antifake.brand.BrandMainActivity;
 import com.example.antifake.dealer.DealerMainActivity;
 import com.example.antifake.manufacturer.ManufacturerMainActivity;
 import com.example.antifake.R;
+import com.peersafe.chainsql.core.Chainsql;
+
+import java.util.logging.Level;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -29,6 +34,13 @@ public class PlaceholderFragment extends Fragment {
     private PageViewModel pageViewModel;
 
     private Button btn=null;
+
+    private EditText editTextAddress;
+    private EditText editTextSecret;
+    String address;
+    String secret;
+
+    public Chainsql c = new Chainsql();
 
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
@@ -64,6 +76,8 @@ public class PlaceholderFragment extends Fragment {
             }
         });
 
+        editTextAddress=root.findViewById(R.id.editText_address);
+        editTextSecret=root.findViewById(R.id.editText_secret);
         btn= root.findViewById(R.id.button_enter);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,16 +85,40 @@ public class PlaceholderFragment extends Fragment {
                 int activity_index=getArguments().getInt(ARG_SECTION_NUMBER);
                 switch (activity_index){
                     case 1:
+                        address=editTextAddress.getText().toString();
+                        secret=editTextSecret.getText().toString();
+                        c.connect("ws://172.26.128.207:6006");
+                        c.connection.client.logger.setLevel(Level.SEVERE);
+                        c.as(address,secret);
                         Intent intent1=new Intent(getActivity(),BrandMainActivity.class);
                         startActivity(intent1);
                         break;
                     case 2:
+                        address=editTextAddress.getText().toString();
+                        secret=editTextSecret.getText().toString();
+                        c.connect("ws://172.26.128.217:6006");
+                        c.connection.client.logger.setLevel(Level.SEVERE);
+                        c.as(address,secret);
                         Intent intent2=new Intent(getActivity(), ManufacturerMainActivity.class);
                         startActivity(intent2);
                         break;
                     case 3:
+                        address=editTextAddress.getText().toString();
+                        secret=editTextSecret.getText().toString();
+                        c.connect("ws://172.26.128.207:6006");
+                        c.connection.client.logger.setLevel(Level.SEVERE);
+                        c.as(address,secret);
                         Intent intent3=new Intent(getActivity(), DealerMainActivity.class);
                         startActivity(intent3);
+                        break;
+                    case 4:
+                        address=editTextAddress.getText().toString();
+                        secret=editTextSecret.getText().toString();
+                        c.connect("ws://172.26.128.217:6006");
+                        c.connection.client.logger.setLevel(Level.SEVERE);
+                        c.as(address,secret);
+                        Intent intent4=new Intent(getActivity(), RegulatorMainActivity.class);
+                        startActivity(intent4);
                         break;
 
                 }
