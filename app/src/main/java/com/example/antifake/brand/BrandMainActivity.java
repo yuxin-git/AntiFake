@@ -1,13 +1,16 @@
-package com.example.antifake;
+package com.example.antifake.brand;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.example.antifake.R;
+import com.example.antifake.SearchInfomationActivity;
+import com.example.antifake.brand.ui.BrandDeallistSearchActivity;
+import com.example.antifake.brand.ui.BrandInventorySearchActivity;
 
 public class BrandMainActivity extends AppCompatActivity {
     private ImageButton btn_search=null;

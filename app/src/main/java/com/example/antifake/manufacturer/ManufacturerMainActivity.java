@@ -1,4 +1,4 @@
-package com.example.antifake;
+package com.example.antifake.manufacturer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import com.example.antifake.R;
+import com.example.antifake.SearchInfomationActivity;
+import com.example.antifake.manufacturer.ui.ManuInfRecordActivity;
+import com.example.antifake.manufacturer.ui.ManuInventorySearchActivity;
 
 public class ManufacturerMainActivity extends AppCompatActivity {
     private ImageButton btn_record=null;

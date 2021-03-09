@@ -1,8 +1,10 @@
-package com.example.antifake;
+package com.example.antifake.dealer.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.antifake.R;
 
 public class DealerInventorySearchActivity extends AppCompatActivity {
 

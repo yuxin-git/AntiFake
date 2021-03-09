@@ -1,14 +1,16 @@
-package com.example.antifake;
+package com.example.antifake.manufacturer.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class DealerInfRecordActivity extends AppCompatActivity {
+import com.example.antifake.R;
+
+public class ManuInfRecordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dealer_inf_record);
+        setContentView(R.layout.activity_manu_inf_record);
     }
 }

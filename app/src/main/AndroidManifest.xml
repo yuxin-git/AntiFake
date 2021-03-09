@@ -11,16 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiFake">
-        <activity android:name=".DealerInventorySearchActivity"></activity>
-        <activity android:name=".DealerInfRecordActivity" />
-        <activity android:name=".ManuInventorySearchActivity" />
-        <activity android:name=".ManuInfRecordActivity" />
-        <activity android:name=".BrandDeallistSearchActivity" />
-        <activity android:name=".BrandInventorySearchActivity" />
+        <activity android:name=".dealer.ui.DealerInfRecordOfflineActivity"></activity>
+        <activity android:name=".dealer.ui.DealerInventorySearchActivity" />
+        <activity android:name=".dealer.ui.DealerInfRecordInetActivity" />
+        <activity android:name=".manufacturer.ui.ManuInventorySearchActivity" />
+        <activity android:name=".manufacturer.ui.ManuInfRecordActivity" />
+        <activity android:name=".brand.ui.BrandDeallistSearchActivity" />
+        <activity android:name=".brand.ui.BrandInventorySearchActivity" />
         <activity android:name=".SearchInfomationActivity" />
-        <activity android:name=".BrandMainActivity" />
-        <activity android:name=".ManufacturerMainActivity" />
-        <activity android:name=".DealerMainActivity" />
+        <activity android:name=".brand.BrandMainActivity" />
+        <activity android:name=".manufacturer.ManufacturerMainActivity" />
+        <activity android:name=".dealer.DealerMainActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

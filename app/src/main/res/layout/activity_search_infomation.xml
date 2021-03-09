@@ -54,7 +54,7 @@
         android:id="@+id/button_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="30dp"
         android:text="查询"
         app:layout_constraintStart_toStartOf="parent"

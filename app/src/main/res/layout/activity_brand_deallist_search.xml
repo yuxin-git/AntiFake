@@ -5,7 +5,7 @@
     android:id="@+id/button_deallist"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BrandDeallistSearchActivity">
+    tools:context=".brand.ui.BrandDeallistSearchActivity">
 
     <TextView
         android:id="@+id/textView5"

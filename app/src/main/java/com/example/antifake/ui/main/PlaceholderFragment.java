@@ -13,14 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.antifake.BrandMainActivity;
-import com.example.antifake.DealerMainActivity;
-import com.example.antifake.MainActivity;
-import com.example.antifake.ManufacturerMainActivity;
+import com.example.antifake.brand.BrandMainActivity;
+import com.example.antifake.dealer.DealerMainActivity;
+import com.example.antifake.manufacturer.ManufacturerMainActivity;
 import com.example.antifake.R;
-import android.view.View;
 
 /**
  * A placeholder fragment containing a simple view.

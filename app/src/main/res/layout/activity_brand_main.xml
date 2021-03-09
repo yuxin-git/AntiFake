@@ -5,7 +5,7 @@
     android:id="@+id/textView_title"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BrandMainActivity">
+    tools:context=".brand.BrandMainActivity">
 
     <TextView
         android:id="@+id/textView_brand_title"
