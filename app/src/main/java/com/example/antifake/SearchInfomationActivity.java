@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.antifake.qrscan.ScanActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -17,6 +18,25 @@ public class SearchInfomationActivity extends AppCompatActivity {
 
     private EditText editTextId=null;
     private ImageButton btnScan=null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_infomation);
+        editTextId=findViewById(R.id.editText_id);
+        btnScan=findViewById(R.id.imageButton_scan);
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator intentIntegrator = new IntentIntegrator(SearchInfomationActivity.this);
+                intentIntegrator.setBeepEnabled(true);
+                /*设置启动我们自定义的扫描活动，若不设置，将启动默认活动*/
+                intentIntegrator.setCaptureActivity(ScanActivity.class);
+                intentIntegrator.initiateScan();
+            }
+        });
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -32,29 +52,6 @@ public class SearchInfomationActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_infomation);
-        editTextId=findViewById(R.id.editText_id);
-        editTextId.setText("好");
-
-        btnScan=findViewById(R.id.imageButton_scan);
-        btnScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentIntegrator intentIntegrator = new IntentIntegrator(SearchInfomationActivity.this);
-                intentIntegrator.setBeepEnabled(true);
-                /*设置启动我们自定义的扫描活动，若不设置，将启动默认活动*/
-                intentIntegrator.setCaptureActivity(ScanActivity.class);
-                intentIntegrator.initiateScan();
-            }
-        });
-
-    }
-
-
 
 
 

@@ -87,6 +87,10 @@ public class PlaceholderFragment extends Fragment {
                     case 1:
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
+                        //方便测试
+                        address="zhrXKdsLwWZW9nBN2TUcntRPLfeYVwcM4p";
+                        secret="xx4u3Y8nVr5QyCewf788Ajj2tod4v";
+
                         c.connect("ws://172.26.128.207:6006");
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
@@ -96,6 +100,11 @@ public class PlaceholderFragment extends Fragment {
                     case 2:
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
+
+                        //方便测试
+                        address="zhrXKdsLwWZW9nBN2TUcntRPLfeYVwcM4p";
+                        secret="xx4u3Y8nVr5QyCewf788Ajj2tod4v";
+
                         c.connect("ws://172.26.128.217:6006");
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
@@ -105,6 +114,11 @@ public class PlaceholderFragment extends Fragment {
                     case 3:
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
+
+                        //方便测试
+                        address="zhrXKdsLwWZW9nBN2TUcntRPLfeYVwcM4p";
+                        secret="xx4u3Y8nVr5QyCewf788Ajj2tod4v";
+
                         c.connect("ws://172.26.128.207:6006");
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
@@ -114,6 +128,11 @@ public class PlaceholderFragment extends Fragment {
                     case 4:
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
+
+                        //方便测试
+                        address="zhrXKdsLwWZW9nBN2TUcntRPLfeYVwcM4p";
+                        secret="xx4u3Y8nVr5QyCewf788Ajj2tod4v";
+
                         c.connect("ws://172.26.128.217:6006");
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);

@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiFake">
-        <activity android:name=".ScanActivity"></activity>
+        <activity android:name=".qrscan.ScanActivity"></activity>
         <activity android:name=".regulator.ui.ReguInfRecordActivity" />
         <activity android:name=".regulator.RegulatorMainActivity" />
         <activity android:name=".dealer.ui.DealerInfRecordOfflineActivity" />
