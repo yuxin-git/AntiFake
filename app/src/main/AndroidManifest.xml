@@ -3,15 +3,18 @@
     package="com.example.antifake">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_fake"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiFake">
-        <activity android:name=".regulator.ui.ReguInfRecordActivity"></activity>
+        <activity android:name=".ScanActivity"></activity>
+        <activity android:name=".regulator.ui.ReguInfRecordActivity" />
         <activity android:name=".regulator.RegulatorMainActivity" />
         <activity android:name=".dealer.ui.DealerInfRecordOfflineActivity" />
         <activity android:name=".dealer.ui.DealerInventorySearchActivity" />

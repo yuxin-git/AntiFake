@@ -46,6 +46,9 @@ dependencies {
     implementation files('libs\\tuples-3.4.0.jar')
     implementation files('libs\\utils-3.4.0.jar')
 
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.google.zxing:core:3.3.0'
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
