@@ -9,10 +9,12 @@ import android.widget.ImageButton;
 
 import com.example.antifake.R;
 import com.example.antifake.SearchInfomationActivity;
+import com.example.antifake.brand.ui.BrandAuthorizeActivity;
 import com.example.antifake.brand.ui.BrandDeallistSearchActivity;
 import com.example.antifake.brand.ui.BrandInventorySearchActivity;
 
 public class BrandMainActivity extends AppCompatActivity {
+    private ImageButton btn_auth=null;
     private ImageButton btn_search=null;
     private ImageButton btn_inventory=null;
     private ImageButton btn_deallist=null;
@@ -21,6 +23,24 @@ public class BrandMainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand_main);
+
+        btn_auth=findViewById(R.id.imageButton_authorize_manu);
+        btn_auth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(BrandMainActivity.this, BrandAuthorizeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_search=findViewById(R.id.imageButton_brand_search);
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(BrandMainActivity.this, SearchInfomationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btn_search=findViewById(R.id.imageButton_brand_search);
         btn_search.setOnClickListener(new View.OnClickListener() {

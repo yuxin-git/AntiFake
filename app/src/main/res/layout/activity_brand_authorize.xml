@@ -2,10 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/textView_title"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".brand.BrandMainActivity">
+    tools:context=".brand.ui.BrandAuthorizeActivity">
 
     <TextView
         android:id="@+id/textView_brand_title"
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
         android:layout_marginTop="20dp"
-        android:text="品牌商操作界面"
+        android:text="资质授权界面"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,11 +32,11 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton_authorize_manu"
+                android:id="@+id/imageButton_auth_manu"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_authorize"
+                app:srcCompat="@drawable/ic_author_manu"
                 tools:ignore="VectorDrawableCompat" />
 
             <ImageButton
@@ -60,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="资质授权"
+                android:text="授权生产"
                 android:textSize="20dp" />
 
             <TextView
@@ -119,7 +118,6 @@
                 android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,10 @@ import com.example.antifake.dealer.DealerMainActivity;
 import com.example.antifake.manufacturer.ManufacturerMainActivity;
 import com.example.antifake.R;
 import com.peersafe.chainsql.core.Chainsql;
+import com.peersafe.chainsql.core.Submit;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.logging.Level;
 
@@ -88,24 +92,26 @@ public class PlaceholderFragment extends Fragment {
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
                         //方便测试
-                        address="zhrXKdsLwWZW9nBN2TUcntRPLfeYVwcM4p";
-                        secret="xx4u3Y8nVr5QyCewf788Ajj2tod4v";
-
-                        c.connect("ws://172.26.128.207:6006");
+                        //address="z4kMq1EHxR8qWMNcz37ZgWeVuCSX5B2dJv";
+                        //secret="xn9v4PSgmBUog6aJqi87JkxaNDvEp";
+/*
+                        c.connect(String.valueOf(R.string.severIP_1));
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
+*/
+
                         Intent intent1=new Intent(getActivity(),BrandMainActivity.class);
                         startActivity(intent1);
                         break;
-                    case 2:
+                    case 2://生产商
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
 
                         //方便测试
-                        address="zhrXKdsLwWZW9nBN2TUcntRPLfeYVwcM4p";
-                        secret="xx4u3Y8nVr5QyCewf788Ajj2tod4v";
+                        address="zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf";
+                        secret="xp1vcANddqbBhbfEr8i624pXcA5B4";
 
-                        c.connect("ws://172.26.128.217:6006");
+                        c.connect(getString(R.string.severIP_2));
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
                         Intent intent2=new Intent(getActivity(), ManufacturerMainActivity.class);
@@ -116,10 +122,10 @@ public class PlaceholderFragment extends Fragment {
                         secret=editTextSecret.getText().toString();
 
                         //方便测试
-                        address="zhrXKdsLwWZW9nBN2TUcntRPLfeYVwcM4p";
-                        secret="xx4u3Y8nVr5QyCewf788Ajj2tod4v";
+                        address="zwAkav6CJtdw2ZfoJXNgZUcWevnD1W16mf";
+                        secret="xxdBJurFvoBrKabnvpRX7nCvfcTyC";
 
-                        c.connect("ws://172.26.128.207:6006");
+                        c.connect(getString(R.string.severIP_1));
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
                         Intent intent3=new Intent(getActivity(), DealerMainActivity.class);
@@ -130,10 +136,10 @@ public class PlaceholderFragment extends Fragment {
                         secret=editTextSecret.getText().toString();
 
                         //方便测试
-                        address="zhrXKdsLwWZW9nBN2TUcntRPLfeYVwcM4p";
-                        secret="xx4u3Y8nVr5QyCewf788Ajj2tod4v";
+                        address="zGWnvpDQ95poA5iwjswcxiiefNBouezZ4k";
+                        secret="xxnrU59HkC6ie5SndrcTJ2acXsnVR";
 
-                        c.connect("ws://172.26.128.217:6006");
+                        c.connect(getString(R.string.severIP_2));
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
                         Intent intent4=new Intent(getActivity(), RegulatorMainActivity.class);
