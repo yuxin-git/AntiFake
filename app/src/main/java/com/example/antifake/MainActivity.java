@@ -45,16 +45,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        /*创建账户并激活代码
+/*
         String rootAddress = "zHb9CJAWyB4zj91VRWn96DkukG4bwdtyTh";
         String rootSecret = "xnoPBzXtMeMyMHUVTgbuqAfg1SUTb";
         Chainsql c = new Chainsql();
-        c.connect(getString(R.string.severIP_1));
+        c.connect(getString(R.string.severIP_2));
         c.connection.client.logger.setLevel(Level.SEVERE);
-        System.out.println( c.generateAddress() );
 
         c.as(rootAddress,rootSecret);
-        JSONObject obj = c.pay("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3","200").submit(SyncCond.validate_success);
+        JSONObject obj = c.pay("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3","5000").submit(SyncCond.validate_success);
         if(obj.has("error_message")){
             try {
                 System.out.println("激活或转账失败。 失败原因: " + obj.getString("error_message"));
@@ -65,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("激活或转账成功");
         }
 
-         */
+*/
+
+
 
 
 

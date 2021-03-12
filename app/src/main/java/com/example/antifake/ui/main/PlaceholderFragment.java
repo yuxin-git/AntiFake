@@ -98,7 +98,21 @@ public class PlaceholderFragment extends Fragment {
                         c.connect(String.valueOf(R.string.severIP_1));
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
+
+
+                        address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
+                        secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
+                        c.connect(getString(R.string.severIP_1));
+                        c.connection.client.logger.setLevel(Level.SEVERE);
+                        c.as(address,secret);
+
+                        String sTableName = "commodity_infor";
+                        JSONObject obj1  = c.table(sTableName).get(c.array("{'ProductTypeNum': '400'}")).submit();
+
+                        System.out.println(obj1);
+
 */
+
 
                         Intent intent1=new Intent(getActivity(),BrandMainActivity.class);
                         startActivity(intent1);

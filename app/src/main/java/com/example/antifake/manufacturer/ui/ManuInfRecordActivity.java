@@ -5,27 +5,52 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.antifake.R;
+import com.example.antifake.brand.ui.auth.BrandAuthManuActivity;
 import com.example.antifake.dealer.ui.DealerInfRecordInetActivity;
 import com.example.antifake.qrscan.ScanActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.peersafe.chainsql.core.Chainsql;
+import com.peersafe.chainsql.core.Submit;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.logging.Level;
 
 public class ManuInfRecordActivity extends AppCompatActivity {
-    private EditText editTextId=null;
+
     private ImageButton btnScan=null;
+    private EditText editTextManuRedId=null;
+    private EditText editTextManuRedNum=null;
+    private EditText editTextManuRedDate=null;
+    private Button buttonManuRedOk=null;
+    private Button buttonManuRedCancel=null;
+    private Integer id;
+    private Integer manuNum;
+    private String manuDate;
+    private Chainsql c = new Chainsql();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manu_inf_record);
 
-        editTextId=findViewById(R.id.editText_id);
+        editTextManuRedId=findViewById(R.id.editText_manu_id_red);
+        editTextManuRedNum=findViewById(R.id.editText_manu_num_red);
+        editTextManuRedDate=findViewById(R.id.editText_manu_date_red);
         btnScan=findViewById(R.id.imageButton_scan);
+        buttonManuRedOk=findViewById(R.id.button_manu_red_ok);
+        buttonManuRedCancel=findViewById(R.id.button_manu_red_cancel);
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +61,33 @@ public class ManuInfRecordActivity extends AppCompatActivity {
                 intentIntegrator.initiateScan();
             }
         });
+        buttonManuRedOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id= Integer.valueOf(editTextManuRedId.getText().toString());
+                manuNum= Integer.valueOf(editTextManuRedNum.getText().toString());
+                manuDate= editTextManuRedDate.getText().toString();
+                System.out.println("1");
+                Handler handler= new Handler() {
+                    public void handleMessage(Message msg){
+                        Toast.makeText(ManuInfRecordActivity.this, "登记成功！", Toast.LENGTH_LONG).show();
+                        ManuInfRecordActivity.this.finish();
+                    };
+
+                };
+                System.out.println("2");
+                manuInsert(handler,id,manuNum,manuDate);
+            }
+        });
+
+        buttonManuRedCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ManuInfRecordActivity.this.finish();
+            }
+        });
+
+
 
     }
 
@@ -47,10 +99,40 @@ public class ManuInfRecordActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                editTextId.setText(result.getContents());
+                editTextManuRedId.setText(result.getContents());
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void manuInsert(final Handler handler,final int id,final int manuNum,final String manuDate){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("3");
+                String address="zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf";
+                String secret="xp1vcANddqbBhbfEr8i624pXcA5B4";
+                c.connect(getString(R.string.severIP_1));
+                c.connection.client.logger.setLevel(Level.SEVERE);
+                c.as(address,secret);
+                String sTableName = "manu_list_01";
+                // 向表sTableName中插入一条记录.
+                String record="{id:"+ id +",'DeliveryState':'0', 'ManufacturerNum':"+manuNum+", 'ProductDate':"+manuDate+"}";
+                JSONObject obj =  c.table(sTableName).insert(c.array(record))
+                        .submit(Submit.SyncCond.db_success);
+
+                if(obj.has("error_message")){
+                    System.out.println(obj);
+                }else {
+                    try {
+                        System.out.println( "status" + obj.getString("status"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                handler.sendEmptyMessage(1);
+            }
+        }).start();
     }
 }
