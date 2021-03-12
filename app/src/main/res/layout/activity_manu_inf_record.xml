@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText_id"
+        app:layout_constraintBottom_toBottomOf="@+id/editText_manu_id_red"
         app:layout_constraintStart_toEndOf="@+id/editText_manu_id_red"
         app:srcCompat="@drawable/ic_code_scanner"
         tools:ignore="VectorDrawableCompat" />
