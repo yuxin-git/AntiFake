@@ -11,11 +11,14 @@ import com.example.antifake.R;
 import com.example.antifake.SearchInfomationActivity;
 import com.example.antifake.manufacturer.ui.ManuInfRecordActivity;
 import com.example.antifake.manufacturer.ui.ManuInventorySearchActivity;
+import com.example.antifake.manufacturer.ui.ManuOutwarehouseActivity;
 
 public class ManufacturerMainActivity extends AppCompatActivity {
     private ImageButton btn_record=null;
+    private ImageButton btn_manuout=null;
     private ImageButton btn_inventory=null;
     private ImageButton btn_search=null;
+
 
 
     @Override
@@ -28,6 +31,15 @@ public class ManufacturerMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(ManufacturerMainActivity.this, ManuInfRecordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_manuout=findViewById(R.id.imageButton_manu_out);
+        btn_manuout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ManufacturerMainActivity.this, ManuOutwarehouseActivity.class);
                 startActivity(intent);
             }
         });

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".manufacturer.ui.ManuInfRecordActivity">
+    tools:context=".manufacturer.ui.ManuOutwarehouseActivity">
 
     <TextView
         android:id="@+id/textView5"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="商品生产入库登记"
+        android:text="商品出库登记"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,62 +53,41 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="生产商编号"
+        android:layout_marginTop="50dp"
+        android:text="经销商编号"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="生产日期"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <EditText
-        android:id="@+id/editText_manu_num_red"
+        android:id="@+id/editText_manu_red_denum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="33dp"
         android:ems="10"
         android:inputType="numberSigned"
         app:layout_constraintStart_toEndOf="@+id/textView18"
         app:layout_constraintTop_toBottomOf="@+id/editText_manu_id_red" />
 
-    <EditText
-        android:id="@+id/editText_manu_date_red"
+    <Button
+        android:id="@+id/button_out_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="3dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/editText_manu_num_red" />
+        android:layout_marginStart="70dp"
+        android:text="出库"
+        app:layout_constraintStart_toEndOf="@+id/button_out_cancel"
+        app:layout_constraintTop_toTopOf="@+id/button_out_cancel" />
 
     <Button
-        android:id="@+id/button_manu_red_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="70dp"
-        android:text="取消"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-    <Button
-        android:id="@+id/button_manu_red_ok"
+        android:id="@+id/button_out_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:text="提交"
-        app:layout_constraintStart_toEndOf="@+id/button_manu_red_cancel"
-        app:layout_constraintTop_toTopOf="@+id/button_manu_red_cancel" />
-
+        android:layout_marginTop="70dp"
+        android:text="取消"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
