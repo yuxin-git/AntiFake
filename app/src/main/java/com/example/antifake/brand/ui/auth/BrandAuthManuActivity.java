@@ -30,7 +30,7 @@ public class BrandAuthManuActivity extends AppCompatActivity {
     private EditText editTextIdBegin=null;
     private Button btnOk;
     private Button btnCancel;
-    private Integer manuNum;
+    private String manuNum;
     private Integer proNum;
     private Integer quality;
     private Integer idBegin;
@@ -53,7 +53,7 @@ public class BrandAuthManuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                manuNum= Integer.valueOf(editTextManuNum.getText().toString());
+                manuNum= editTextManuNum.getText().toString();
                 proNum= Integer.valueOf(editTextProNum.getText().toString());
                 quality= Integer.valueOf(editTextQuality.getText().toString());
                 idBegin= Integer.valueOf(editTextIdBegin.getText().toString());
@@ -81,7 +81,7 @@ public class BrandAuthManuActivity extends AppCompatActivity {
 
     }
 
-    public void insert(final Handler handler,final int manuNum,final int proNum,final int quality,final int idBegin){
+    public void insert(final Handler handler,final String manuNum,final int proNum,final int quality,final int idBegin){
         final int[] id = {idBegin};
         new Thread(new Runnable() {
             @Override
@@ -95,7 +95,7 @@ public class BrandAuthManuActivity extends AppCompatActivity {
                 i=0;
                 Integer id=0;
                 while(i<quality){
-                    String sTableName = "commodity_infor";
+                    String sTableName = "com_infor";
                     // 向表sTableName中插入一条记录.
                     id=i+idBegin;
                     String record="{id:"+ id +", 'ManufacturerNum':"+manuNum+", 'ProductTypeNum':"+proNum+"}";

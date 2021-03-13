@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         String rootAddress = "zHb9CJAWyB4zj91VRWn96DkukG4bwdtyTh";
         String rootSecret = "xnoPBzXtMeMyMHUVTgbuqAfg1SUTb";
         Chainsql c = new Chainsql();
-        c.connect(getString(R.string.severIP_2));
+        c.connect(getString(R.string.severIP_1));
         c.connection.client.logger.setLevel(Level.SEVERE);
 
         c.as(rootAddress,rootSecret);
@@ -64,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("激活或转账成功");
         }
 
+
+
+
 */
-
-
-
 
 
 

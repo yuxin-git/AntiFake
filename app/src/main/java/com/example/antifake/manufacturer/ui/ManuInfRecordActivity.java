@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.antifake.R;
 import com.example.antifake.brand.ui.auth.BrandAuthManuActivity;
+import com.example.antifake.currentDate;
 import com.example.antifake.dealer.ui.DealerInfRecordInetActivity;
 import com.example.antifake.qrscan.ScanActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -25,18 +26,16 @@ import com.peersafe.chainsql.core.Submit;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.logging.Level;
 
 public class ManuInfRecordActivity extends AppCompatActivity {
 
     private ImageButton btnScan=null;
     private EditText editTextManuRedId=null;
-    private EditText editTextManuRedNum=null;
-    private EditText editTextManuRedDate=null;
     private Button buttonManuRedOk=null;
     private Button buttonManuRedCancel=null;
     private Integer id;
-    private Integer manuNum;
     private String manuDate;
     private Chainsql c = new Chainsql();
 
@@ -46,8 +45,7 @@ public class ManuInfRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manu_inf_record);
 
         editTextManuRedId=findViewById(R.id.editText_manu_id_red);
-        editTextManuRedNum=findViewById(R.id.editText_manu_num_red);
-        editTextManuRedDate=findViewById(R.id.editText_manu_date_red);
+
         btnScan=findViewById(R.id.imageButton_scan);
         buttonManuRedOk=findViewById(R.id.button_manu_red_ok);
         buttonManuRedCancel=findViewById(R.id.button_manu_red_cancel);
@@ -65,18 +63,16 @@ public class ManuInfRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 id= Integer.valueOf(editTextManuRedId.getText().toString());
-                manuNum= Integer.valueOf(editTextManuRedNum.getText().toString());
-                manuDate= editTextManuRedDate.getText().toString();
-                System.out.println("1");
                 Handler handler= new Handler() {
                     public void handleMessage(Message msg){
-                        Toast.makeText(ManuInfRecordActivity.this, "登记成功！", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ManuInfRecordActivity.this, "入库成功！", Toast.LENGTH_LONG).show();
                         ManuInfRecordActivity.this.finish();
                     };
 
                 };
-                System.out.println("2");
-                manuInsert(handler,id,manuNum,manuDate);
+                currentDate cDate=new currentDate();
+                manuDate=cDate.getcurrentDate();
+                manuInsert(handler,id,manuDate);
             }
         });
 
@@ -106,7 +102,7 @@ public class ManuInfRecordActivity extends AppCompatActivity {
         }
     }
 
-    public void manuInsert(final Handler handler,final int id,final int manuNum,final String manuDate){
+    private void manuInsert(final Handler handler,final int id,final String manuDate){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -116,9 +112,10 @@ public class ManuInfRecordActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address,secret);
-                String sTableName = "manu_list_01";
+                String sTableName = "M001"; //待完善，通过按账户查询获取该账户对应的生产商编号及表名
                 // 向表sTableName中插入一条记录.
-                String record="{id:"+ id +",'DeliveryState':'0', 'ManufacturerNum':"+manuNum+", 'ProductDate':"+manuDate+"}";
+                int a=0;
+                String record="{ID:"+ id +",'DeliveryState':0, 'ManufacturerNum':"+sTableName+", 'ProductDate':'"+manuDate+"'}";
                 JSONObject obj =  c.table(sTableName).insert(c.array(record))
                         .submit(Submit.SyncCond.db_success);
 
@@ -135,4 +132,5 @@ public class ManuInfRecordActivity extends AppCompatActivity {
             }
         }).start();
     }
+
 }

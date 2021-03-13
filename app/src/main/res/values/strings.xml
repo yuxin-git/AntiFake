@@ -9,9 +9,10 @@
     <string name="text_3">登录</string>
 
     <!--chainsql相关配置-->
-    <string name="severIP_1">ws://172.26.128.199:9123</string>
-    <string name="severIP_2">ws://172.26.128.199:9124</string>
+    <string name="severIP_1">ws://172.26.129.2:9123</string>
+    <string name="severIP_2">ws://172.26.129.2:9124</string>
+    <string name="severIP_3">ws://172.26.129.2:9125</string>
     <!--用户查询专用账户和密钥，固定不变，仅有查询权限-->
-    <string name="client_address">zhrXKdsLwWZW9nBN2TUcntRPLfeYVwcM4p</string>
-    <string name="client_secret">xx4u3Y8nVr5QyCewf788Ajj2tod4v</string>
+    <string name="client_address">zpncip6ZUTrfqz3nSHpix4eQyMS4F1KM83</string>
+    <string name="client_secret">xnaUqqt6Nb6ysdyXWewu7u2UxBAAD</string>
 </resources>

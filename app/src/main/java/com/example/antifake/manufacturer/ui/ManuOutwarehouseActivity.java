@@ -20,10 +20,12 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.peersafe.chainsql.core.Chainsql;
 import com.peersafe.chainsql.core.Submit;
+import com.peersafe.chainsql.util.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.logging.Level;
 
 public class ManuOutwarehouseActivity extends AppCompatActivity {
@@ -34,14 +36,14 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
     private Button btnOutOk=null;
     private Button btnOutCancel=null;
     private Integer id;
-    private Integer deNum;
+    private String deNum;
     private Chainsql c = new Chainsql();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manu_outwarehouse);
-        editTextOutId=findViewById(R.id.editText_id);
+        editTextOutId=findViewById(R.id.editText_manu_id_red);
         editTextOutDeNum=findViewById(R.id.editText_manu_red_denum);
         btnOutOk=findViewById(R.id.button_out_ok);
         btnOutCancel=findViewById(R.id.button_out_cancel);
@@ -60,8 +62,7 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 id= Integer.valueOf(editTextOutId.getText().toString());
-                deNum= Integer.valueOf(editTextOutDeNum.getText().toString());
-                System.out.println("1");
+                deNum= editTextOutDeNum.getText().toString();
                 Handler handler= new Handler() {
                     public void handleMessage(Message msg){
                         Toast.makeText(ManuOutwarehouseActivity.this, "出库成功！", Toast.LENGTH_LONG).show();
@@ -69,7 +70,6 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
                     };
 
                 };
-                System.out.println("2");
                 manuOut(handler,id,deNum);
             }
         });
@@ -96,19 +96,23 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
         }
     }
 
-    public void manuOut(final Handler handler,final int id,final int deNum){
+    public void manuOut(final Handler handler,final int id,final String deNum){
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("3");
                 String address="zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf";
                 String secret="xp1vcANddqbBhbfEr8i624pXcA5B4";
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address,secret);
-                String sTableName = "manu_list_01";
-                // 向表sTableName中插入一条记录.
-                //待完善，更新表
+                String sTableName = "M001";
+                String searchid="{'id': "+id+"}";
+                String update="{'DeliveryState':'1','DealerNum':"+deNum+"}";
+                List<String> arr = Util.array(searchid);
+
+                JSONObject obj;
+                obj = c.table(sTableName).get(arr).update(update).submit(Submit.SyncCond.db_success);
+                System.out.println("update result:" + obj);
                 handler.sendEmptyMessage(1);
             }
         }).start();
