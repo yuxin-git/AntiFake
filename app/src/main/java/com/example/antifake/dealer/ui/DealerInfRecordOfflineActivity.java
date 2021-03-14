@@ -119,8 +119,10 @@ public class DealerInfRecordOfflineActivity extends AppCompatActivity {
                 c.as(address,secret);
                 String sTableName = "D001"; //待完善，通过按账户查询获取该账户对应的生产商编号及表名
                 // 向表sTableName中插入一条记录.
-                String record="{ID:"+ id +",'SaleState':'1','SaleType':1, 'CustomerName':'"+cusName+"', 'CustomerTel':'"+cusTel
-                        +"', 'SalePlaceName':'"+saleName+"', 'SaleDate':'"+deDate+"'}";
+                String record="{ID:"+ id +",'SaleState':'1','SaleDate':'"+deDate
+                        +"','SaleType':'1','CustomerName':'"+cusName
+                        +"','CustomerTel':'"+cusTel+"','DealerNum':'"+sTableName
+                        +"','SalePlaceName':'"+saleName+"'}";
                 JSONObject obj =  c.table(sTableName).insert(c.array(record))
                         .submit(Submit.SyncCond.db_success);
 

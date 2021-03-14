@@ -120,7 +120,7 @@ public class PlaceholderFragment extends Fragment {
                     case 2://生产商
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
-
+/*
                         //方便测试
                         address="zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf";
                         secret="xp1vcANddqbBhbfEr8i624pXcA5B4";
@@ -128,13 +128,15 @@ public class PlaceholderFragment extends Fragment {
                         c.connect(getString(R.string.severIP_2));
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
+
+ */
                         Intent intent2=new Intent(getActivity(), ManufacturerMainActivity.class);
                         startActivity(intent2);
                         break;
                     case 3:
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
-
+/*
                         //方便测试
                         address="zwAkav6CJtdw2ZfoJXNgZUcWevnD1W16mf";
                         secret="xxdBJurFvoBrKabnvpRX7nCvfcTyC";
@@ -142,13 +144,15 @@ public class PlaceholderFragment extends Fragment {
                         c.connect(getString(R.string.severIP_1));
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
+
+ */
                         Intent intent3=new Intent(getActivity(), DealerMainActivity.class);
                         startActivity(intent3);
                         break;
                     case 4:
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
-
+/*
                         //方便测试
                         address="zGWnvpDQ95poA5iwjswcxiiefNBouezZ4k";
                         secret="xxnrU59HkC6ie5SndrcTJ2acXsnVR";
@@ -156,6 +160,8 @@ public class PlaceholderFragment extends Fragment {
                         c.connect(getString(R.string.severIP_2));
                         c.connection.client.logger.setLevel(Level.SEVERE);
                         c.as(address,secret);
+
+ */
                         Intent intent4=new Intent(getActivity(), RegulatorMainActivity.class);
                         startActivity(intent4);
                         break;

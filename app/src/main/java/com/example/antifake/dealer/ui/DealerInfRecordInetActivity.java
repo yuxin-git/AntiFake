@@ -41,9 +41,9 @@ public class  DealerInfRecordInetActivity extends AppCompatActivity {
     private Button btnDeInetCancel=null;
     private Integer id;
     private String cusName;
-    private Integer cusTel;
+    private String cusTel;
     private String cusAdd;
-    private Integer deliverNum;
+    private String deliverNum;
     private String deDate;
     private Chainsql c = new Chainsql();
 
@@ -75,9 +75,9 @@ public class  DealerInfRecordInetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cusName= editTextCusName.getText().toString();
-                cusTel= Integer.valueOf(editTextCusTel.getText().toString());
+                cusTel= editTextCusTel.getText().toString();
                 cusAdd= editTextCusAdd.getText().toString();
-                deliverNum=Integer.valueOf(editTextDeliveryNum.getText().toString());
+                deliverNum=editTextDeliveryNum.getText().toString();
                 id= Integer.valueOf(textViewId.getText().toString());
                 Handler handler= new Handler() {
                     public void handleMessage(Message msg){
@@ -118,7 +118,7 @@ public class  DealerInfRecordInetActivity extends AppCompatActivity {
     }
 
     private void deInetInsert(final Handler handler,final int id,final String cusName,
-                              final int cusTel,final String cusAdd,final int deliverNum,final String deDate){
+                              final String cusTel,final String cusAdd,final String deliverNum,final String deDate){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -129,8 +129,10 @@ public class  DealerInfRecordInetActivity extends AppCompatActivity {
                 c.as(address,secret);
                 String sTableName = "D001"; //待完善，通过按账户查询获取该账户对应的生产商编号及表名
                 // 向表sTableName中插入一条记录.
-                String record="{ID:"+ id +",'SaleType':0, 'CustomerName':'"+cusName+"', 'CustomerTel':"+cusTel
-                        +", 'CustomerAdd':'"+cusAdd+"', 'DeliveryNum':"+deliverNum+", 'SaleDate':'"+deDate+"'}";
+                String record="{ID:"+ id +",'SaleState':'1','SaleType':'0', 'CustomerName':'"+cusName
+                        +"', 'CustomerTel':'"+cusTel +"', 'CustomerAdd':'"+cusAdd
+                        +"', 'DeliveryNum':'"+deliverNum+"','DealerNum':'"+sTableName
+                        +"', 'SaleDate':'"+deDate+"'}";
                 JSONObject obj =  c.table(sTableName).insert(c.array(record))
                         .submit(Submit.SyncCond.db_success);
 
