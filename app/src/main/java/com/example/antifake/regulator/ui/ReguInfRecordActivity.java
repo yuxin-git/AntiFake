@@ -118,14 +118,33 @@ public class ReguInfRecordActivity extends AppCompatActivity {
                 String sTableName = "R001";
                 // 向表sTableName中插入一条记录.
                 String record="{id:"+ idregu +", 'WorkerNum':"+nameregu+",'RegulatorNum':"+sTableName+",'RegulatorDate':'"+dateregu+"', 'RegulatorResult':"+resultregu+"}";
-                JSONObject obj =  c.table(sTableName).insert(c.array(record))
+                JSONObject obj1 =  c.table(sTableName).insert(c.array(record))
                         .submit(Submit.SyncCond.db_success);
 
-                if(obj.has("error_message")){
-                    System.out.println(obj);
+                if(obj1.has("error_message")){
+                    System.out.println(obj1);
                 }else {
                     try {
-                        System.out.println( "status" + obj.getString("status"));
+                        System.out.println( "status" + obj1.getString("status"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                String table="com_infor";
+                // 更新 id 等于 idregu 的记录
+                String str1="{'id':"+idregu+"}";
+                String str2="{'RegulatorNum':'"+sTableName+"'}";
+                JSONObject obj2 = c.table(table)
+                        .get(c.array(str1))
+                        .update(str2)
+                        .submit(Submit.SyncCond.db_success);
+
+                if(obj2.has("error_message")){
+                    System.out.println(obj2);
+                }else {
+                    try {
+                        System.out.println( "status" + obj2.getString("status"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
