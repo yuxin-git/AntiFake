@@ -119,18 +119,18 @@ public class ManuInfRecordActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
-                String sTableName = "D001";
+                String sTableName = "M001";
                 String table = "com_infor";
                 // 更新 id 等于 id 的记录
                 String str1 = "{'id':" + id + "}";
-                String str2 = "{'DealerNum':'" + sTableName + "'}";
                 c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
                 JSONObject obj = c.table(table).get(c.array(str1)).submit();
                 try {
-                    if (obj.getString("lines").equals("[]")) {
+                    if (obj.getString("lines").equals("[]"))
                         handler.sendEmptyMessage(0);
-                    } else {
-                        JSONObject obj1 = c.table(table).get(c.array(str1)).update(str2).submit(Submit.SyncCond.db_success);
+                    else if(obj.getString("lines").contains(sTableName)==false)
+                        handler.sendEmptyMessage(0);
+                    else {
                         c.use("zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf");
                         // 向表sTableName中插入一条记录.
                         String record="{ID:"+ id +",'DeliveryState':0, 'ManufacturerNum':"
