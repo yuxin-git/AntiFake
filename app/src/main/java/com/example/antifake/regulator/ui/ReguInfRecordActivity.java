@@ -24,6 +24,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.peersafe.chainsql.core.Chainsql;
 import com.peersafe.chainsql.core.Submit;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -138,11 +139,24 @@ public class ReguInfRecordActivity extends AppCompatActivity {
                     if (obj.getString("lines").equals("[]")) {
                         handler.sendEmptyMessage(0);
                     } else {
+                        /*
+                        JSONArray objtest=obj.getJSONArray("lines");
+                        JSONObject obj5=objtest.getJSONObject(0);
+                        String manutest=obj5.getString("ManufacturerNum");
+                         */
+                        String proTypeNum=obj.getJSONArray("lines")
+                                .getJSONObject(0).getString("ProductTypeNum");
+                        String proName=obj.getJSONArray("lines")
+                                .getJSONObject(0).getString("ProductName");
+                        String manuNum=obj.getJSONArray("lines")
+                                .getJSONObject(0).getString("ManufacturerNum");
                         JSONObject obj1 = c.table(table).get(c.array(str1)).update(str2).submit(Submit.SyncCond.db_success);
                         c.use("zL36kWKGdqx9fXK4dzVc95ErriGuCQng5z");
                         // 向表sTableName中插入一条记录.
-                        String record="{id:"+ idregu +", 'WorkerNum':"+nameregu+",'RegulatorNum':"
-                                +sTableName+",'RegulatorDate':'"+dateregu+"', 'RegulatorResult':"+resultregu+"}";
+                        String record="{id:"+ idregu +", 'WorkerNum':"+nameregu
+                                +",'ProductTypeNum':'"+proTypeNum+"','ProductName':'"+proName
+                                +"','ManufacturerNum':'"+manuNum+"','RegulatorNum':" +sTableName
+                                +",'RegulatorDate':'"+dateregu+ "', 'RegulatorResult':"+resultregu+"}";
                         JSONObject obj2 = c.table(sTableName).insert(c.array(record))
                                 .submit(Submit.SyncCond.db_success);
                         if(obj2.has("error_message")){

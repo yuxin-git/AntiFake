@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.antifake.R;
+import com.example.antifake.regulator.ui.ReguInfRecordActivity;
 import com.peersafe.chainsql.core.Chainsql;
 import com.peersafe.chainsql.core.Submit;
 
@@ -60,7 +61,16 @@ public class BrandAuthManuActivity extends AppCompatActivity {
                 System.out.println("1");
                 Handler handler= new Handler() {
                     public void handleMessage(Message msg){
-                        Toast.makeText(BrandAuthManuActivity.this, "授权成功！", Toast.LENGTH_LONG).show();
+                        if(msg.what==0) {
+                            Toast.makeText(BrandAuthManuActivity.this,
+                                    "授权成功！", Toast.LENGTH_LONG).show();
+                        } else if(msg.what==1){
+                            Toast.makeText(BrandAuthManuActivity.this,
+                                    "授权失败！不存在该品类商品", Toast.LENGTH_LONG).show();
+                        } else if(msg.what==2){
+                            Toast.makeText(BrandAuthManuActivity.this,
+                                    "该ID已存在，授权失败！", Toast.LENGTH_LONG).show();
+                        }
                         BrandAuthManuActivity.this.finish();
                     };
 
@@ -92,28 +102,37 @@ public class BrandAuthManuActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address,secret);
-                i=0;
-                Integer id=0;
-                while(i<quality){
-                    String sTableName = "com_infor";
-                    // 向表sTableName中插入一条记录.
-                    id=i+idBegin;
-                    String record="{id:"+ id +", 'ManufacturerNum':"+manuNum+", 'ProductTypeNum':"+proNum+"}";
-                    JSONObject obj =  c.table(sTableName).insert(c.array(record))
-                            .submit(Submit.SyncCond.db_success);
-
-                    if(obj.has("error_message")){
-                        System.out.println(obj);
-                    }else {
-                        try {
-                            System.out.println( "status" + obj.getString("status"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                String str1 = "{'ProductTypeNum':" + proNum + "}";
+                c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
+                String table="com_list";    //商品类型对应表
+                JSONObject objProtype = c.table(table).get(c.array(str1)).submit();
+                try {
+                    if (objProtype.getString("lines").equals("[]"))
+                        handler.sendEmptyMessage(1);
+                    else{
+                        String proName=objProtype.getJSONArray("lines")
+                                .getJSONObject(0).getString("ProductName");
+                        i=0;
+                        Integer id=0;
+                        String sTableName = "com_infor";    //品牌商商品信息总表
+                        while(i<quality){
+                            id=i+idBegin;
+                            String record="{id:"+ id +", 'ManufacturerNum':"+manuNum
+                                    +", 'ProductTypeNum':"+proNum +", 'ProductName':'"+proName+"'}";
+                            JSONObject obj =  c.table(sTableName).insert(c.array(record))
+                                    .submit(Submit.SyncCond.db_success);
+                            if(obj.has("error_message")){
+                                System.out.println(obj);
+                            }else {
+                                System.out.println( "status" + obj.getString("status"));
+                            }
+                            i++;
                         }
+                        handler.sendEmptyMessage(0);
                     }
-                    i++;
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                handler.sendEmptyMessage(1);
             }
         }).start();
     }

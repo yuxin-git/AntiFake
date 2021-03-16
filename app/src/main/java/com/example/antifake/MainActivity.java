@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         "{'field':'ProductTypeNum','type':'int','length':20}",
                         "{'field':'ProductName','type':'varchar','length':50,'default':null}",
                         "{'field':'ManufacturerNum','type':'varchar','length':20}",
-                        "{'field':'ManufacturerName','type':'varchar','length':70,'default':null}",
+                        //删除"{'field':'ManufacturerName','type':'varchar','length':70,'default':null}",
                         "{'field':'DeliveryState','type':'int','length':5,'default':0}",
                         "{'field':'ProductDate','type':'varchar','length':70}",
                         "{'field':'DealerNum','type':'varchar','length':20}"),
@@ -162,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
  */
+
+
 /*
                 //操作四：创建监管机构表项
                 String address="zL36kWKGdqx9fXK4dzVc95ErriGuCQng5z";
@@ -175,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
                         "{'field':'ProductTypeNum','type':'int','length':20}",
                         "{'field':'ProductName','type':'varchar','length':50,'default':null}",
                         "{'field':'ManufacturerNum','type':'varchar','length':20}",
-                        "{'field':'ManufacturerName','type':'varchar','length':70,'default':null}",
+                        //删除"{'field':'ManufacturerName','type':'varchar','length':70,'default':null}",
                         "{'field':'RegulatorNum','type':'varchar','length':20}",
-                        "{'field':'RegulatorName','type':'varchar','length':70,'default':null}",
+                        //删除"{'field':'RegulatorName','type':'varchar','length':70,'default':null}",
                         "{'field':'WorkerNum','type':'varchar','length':20}",
                         "{'field':'RegulatorDate','type':'varchar','length':70}",
                         "{'field':'RegulatorResult','type':'varchar','length':70}"),
@@ -195,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
  */
+
+
 
 
 /*
@@ -284,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                  */
+                /*
                 //操作八：创建品牌商表项(监管机构列表)
                 String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
                 String secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
@@ -308,6 +313,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
+
+                 */
 
 
 

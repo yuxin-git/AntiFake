@@ -139,10 +139,15 @@ public class DealerInfRecordOfflineActivity extends AppCompatActivity {
                     if (obj.getString("lines").equals("[]")) {
                         handler.sendEmptyMessage(0);
                     } else {
-                        JSONObject obj1 = c.table(table).get(c.array(str1)).update(str2).submit(Submit.SyncCond.db_success);
+                        String proTypeNum=obj.getJSONArray("lines")
+                                .getJSONObject(0).getString("ProductTypeNum");
+                        String proName=obj.getJSONArray("lines")
+                                .getJSONObject(0).getString("ProductName");
+                        c.table(table).get(c.array(str1)).update(str2).submit(Submit.SyncCond.db_success);
                         c.use("zNoePXrfYvz8jvDiDNr3RNi4PwtBYhQxAR");
                         // 向表sTableName中插入一条记录.
                         String record = "{ID:" + id + ",'SaleState':'1','SaleDate':'" + deDate
+                                +"','ProductTypeNum':'"+proTypeNum+"','ProductName':'"+proName
                                 + "','SaleType':'1','CustomerName':'" + cusName
                                 + "','CustomerTel':'" + cusTel + "','DealerNum':'" + sTableName
                                 + "','SalePlaceName':'" + saleName + "'}";

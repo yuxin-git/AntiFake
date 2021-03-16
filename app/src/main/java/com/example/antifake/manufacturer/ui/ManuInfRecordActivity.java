@@ -131,10 +131,15 @@ public class ManuInfRecordActivity extends AppCompatActivity {
                     else if(obj.getString("lines").contains(sTableName)==false)
                         handler.sendEmptyMessage(0);
                     else {
+                        String proTypeNum=obj.getJSONArray("lines")
+                                .getJSONObject(0).getString("ProductTypeNum");
+                        String proName=obj.getJSONArray("lines")
+                                .getJSONObject(0).getString("ProductName");
                         c.use("zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf");
                         // 向表sTableName中插入一条记录.
-                        String record="{ID:"+ id +",'DeliveryState':0, 'ManufacturerNum':"
-                                +sTableName+", 'ProductDate':'"+manuDate+"'}";
+                        String record="{ID:"+ id +",'DeliveryState':0, 'ManufacturerNum':'" +sTableName
+                                +"','ProductTypeNum':'"+proTypeNum+"','ProductName':'"+proName
+                                +"', 'ProductDate':'"+manuDate+"'}";
                         JSONObject obj2 = c.table(sTableName).insert(c.array(record))
                                 .submit(Submit.SyncCond.db_success);
                         if(obj2.has("error_message")){
