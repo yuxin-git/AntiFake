@@ -16,13 +16,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.antifake.dealer.ui.DealerInfRecordInetActivity;
-import com.example.antifake.manufacturer.ui.ManuInfRecordActivity;
 import com.example.antifake.qrscan.ScanActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.peersafe.chainsql.core.Chainsql;
-import com.peersafe.chainsql.core.Submit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +45,6 @@ public class SearchInfomationActivity extends AppCompatActivity {
     private String cusTel=null;
     private String cusAdd=null;
     private String deliveryNum=null;
-    private String salePlaceName=null;
     private String reguDate=null;
     private String reguResult=null;
 
@@ -88,8 +84,8 @@ public class SearchInfomationActivity extends AppCompatActivity {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchInfomationActivity.this);
                                 builder.setIcon(R.drawable.ic_search)
                                         .setTitle("查询结果")
-                                        .setMessage("        查询失败,该商品ID不存在！")
                                         .setView(img)
+                                        .setMessage("\n          查询失败,该商品ID不存在！\n")
                                         .setNegativeButton("确定", null);
                                 builder.create().show();
                             }else if(msg.what==1) {
@@ -98,14 +94,15 @@ public class SearchInfomationActivity extends AppCompatActivity {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchInfomationActivity.this);
                                 builder.setIcon(R.drawable.ic_search)
                                         .setTitle("查询结果")
-                                        .setMessage("                   查询成功！")
                                         .setView(img)
+                                        .setMessage("\n                       查询成功！\n")
                                         .setNegativeButton("返回", null)
                                         .setPositiveButton("查看防伪溯源结果", new DialogInterface.OnClickListener(){
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 //溯源结果
                                                 String result="\n----------------------------------------------------------"
+                                                        +"\n商品ID："+id
                                                         +"\n商品名称："+proName
                                                         +"\n----------------------------------------------------------"
                                                         +"\n生产商名称："+manuName
@@ -122,7 +119,6 @@ public class SearchInfomationActivity extends AppCompatActivity {
                                                         +"\n顾客电话："+cusTel
                                                         +"\n顾客地址："+cusAdd
                                                         +"\n物流单号："+deliveryNum
-                                                        +"\n销售门店："+salePlaceName
                                                         +"\n----------------------------------------------------------";
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchInfomationActivity.this);
                                                 builder.setIcon(R.drawable.ic_search)
@@ -250,12 +246,8 @@ public class SearchInfomationActivity extends AppCompatActivity {
         try {
             saleDate=obj2.getJSONArray("lines")
                     .getJSONObject(0).getString("SaleDate");
-            String type=obj2.getJSONArray("lines")
+            saleType=obj2.getJSONArray("lines")
                     .getJSONObject(0).getString("SaleType");
-            if(type.equals("0"))
-                saleType="线上";
-            else if(type.equals("1"))
-                saleType="线下";
             cusName=obj2.getJSONArray("lines")
                     .getJSONObject(0).getString("CustomerName");
             cusTel=obj2.getJSONArray("lines")
@@ -264,8 +256,6 @@ public class SearchInfomationActivity extends AppCompatActivity {
                     .getJSONObject(0).getString("CustomerAdd");
             deliveryNum=obj2.getJSONArray("lines")
                     .getJSONObject(0).getString("DeliveryNum");
-            salePlaceName=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("SalePlaceName");
         } catch (JSONException e) {
             e.printStackTrace();
         }

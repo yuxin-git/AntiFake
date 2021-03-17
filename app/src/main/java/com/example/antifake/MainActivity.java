@@ -3,9 +3,7 @@ package com.example.antifake;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.antifake.dealer.ui.DealerInfRecordOfflineActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.viewpager.widget.ViewPager;
@@ -13,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Handler;
 import android.os.Message;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,12 +18,9 @@ import android.widget.Toast;
 import com.example.antifake.ui.main.SectionsPagerAdapter;
 import com.peersafe.chainsql.core.Chainsql;
 import com.peersafe.chainsql.core.Submit;
-import com.peersafe.chainsql.core.Submit.SyncCond;
-import com.peersafe.chainsql.util.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 import java.util.logging.Level;
 
@@ -96,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
  */
-/*
+
                 //操作二：创建经销商表项
                 String address = "zNoePXrfYvz8jvDiDNr3RNi4PwtBYhQxAR";
                 String secret = "xhpgTk8ALwWMugf921ak9eJdqtG4Q";
@@ -111,14 +104,13 @@ public class MainActivity extends AppCompatActivity {
                         "{'field':'DealerNum','type':'varchar','length':20}",
                         "{'field':'SaleState','type':'int','length':5,'default':0}",
                         "{'field':'SaleDate','type':'varchar','length':60,'default':null}",
-                        "{'field':'SaleType','type':'int','length':5}",
+                        "{'field':'SaleType','type':'varchar','length':20,'default':null}",
                         "{'field':'CustomerName','type':'varchar','length':50,'default':null}",
                         "{'field':'CustomerTel','type':'varchar','length':70}",
                         "{'field':'CustomerAdd','type':'varchar','length':70,'default':null}",
-                        "{'field':'DeliveryNum','type':'varchar','length':70}",
-                        "{'field':'SalePlaceName','type':'varchar','length':70,'default':null}"),
+                        "{'field':'DeliveryNum','type':'varchar','length':70}"),
                         false)
-                        .submit(SyncCond.db_success);
+                        .submit(Submit.SyncCond.db_success);
 
                 if (obj.has("error_message")) {
                     System.out.println(obj);
@@ -129,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-*/
+
 
 /*
                 //操作三：创建生产商表项

@@ -14,9 +14,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.antifake.R;
-import com.example.antifake.brand.ui.auth.BrandAuthManuActivity;
 import com.example.antifake.currentDate;
-import com.example.antifake.dealer.ui.DealerInfRecordInetActivity;
 import com.example.antifake.qrscan.ScanActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -26,7 +24,6 @@ import com.peersafe.chainsql.core.Submit;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Calendar;
 import java.util.logging.Level;
 
 public class ManuInfRecordActivity extends AppCompatActivity {
@@ -38,14 +35,17 @@ public class ManuInfRecordActivity extends AppCompatActivity {
     private Integer id;
     private String manuDate;
     private Chainsql c = new Chainsql();
+    private String address=null;
+    private String secret=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manu_inf_record);
-
+        Intent intent=getIntent();
+        address=intent.getStringExtra("address");
+        secret=intent.getStringExtra("secret");
         editTextManuRedId=findViewById(R.id.editText_manu_id_red);
-
         btnScan=findViewById(R.id.imageButton_scan);
         buttonManuRedOk=findViewById(R.id.button_manu_red_ok);
         buttonManuRedCancel=findViewById(R.id.button_manu_red_cancel);
@@ -113,9 +113,6 @@ public class ManuInfRecordActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("3");
-                String address="zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf";
-                String secret="xp1vcANddqbBhbfEr8i624pXcA5B4";
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
@@ -135,7 +132,7 @@ public class ManuInfRecordActivity extends AppCompatActivity {
                                 .getJSONObject(0).getString("ProductTypeNum");
                         String proName=obj.getJSONArray("lines")
                                 .getJSONObject(0).getString("ProductName");
-                        c.use("zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf");
+                        c.use(address);
                         // 向表sTableName中插入一条记录.
                         String record="{ID:"+ id +",'DeliveryState':0, 'ManufacturerNum':'" +sTableName
                                 +"','ProductTypeNum':'"+proTypeNum+"','ProductName':'"+proName

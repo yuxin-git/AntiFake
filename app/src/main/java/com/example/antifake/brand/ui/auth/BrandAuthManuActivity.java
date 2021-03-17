@@ -2,6 +2,7 @@ package com.example.antifake.brand.ui.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.Handler;
@@ -29,6 +30,8 @@ public class BrandAuthManuActivity extends AppCompatActivity {
     private EditText editTextProNum=null;
     private EditText editTextQuality=null;
     private EditText editTextIdBegin=null;
+    private String address=null;
+    private String secret=null;
     private Button btnOk;
     private Button btnCancel;
     private String manuNum;
@@ -44,6 +47,9 @@ public class BrandAuthManuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand_auth_manu);
+        Intent intent=getIntent();
+        address=intent.getStringExtra("address");
+        secret=intent.getStringExtra("secret");
         editTextManuNum=findViewById(R.id.editText_manu_num);
         editTextProNum=findViewById(R.id.editText_pro_num);
         editTextQuality=findViewById(R.id.editText_quanlity);
@@ -97,8 +103,6 @@ public class BrandAuthManuActivity extends AppCompatActivity {
             @Override
             public void run() {
                 System.out.println("3");
-                String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
-                String secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address,secret);

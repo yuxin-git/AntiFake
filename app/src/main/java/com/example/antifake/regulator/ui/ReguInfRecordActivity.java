@@ -14,22 +14,16 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.antifake.R;
-import com.example.antifake.brand.ui.auth.BrandAuthManuActivity;
 import com.example.antifake.currentDate;
-import com.example.antifake.dealer.ui.DealerInfRecordInetActivity;
-import com.example.antifake.dealer.ui.DealerInfRecordOfflineActivity;
 import com.example.antifake.qrscan.ScanActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.peersafe.chainsql.core.Chainsql;
 import com.peersafe.chainsql.core.Submit;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Calendar;
 import java.util.logging.Level;
 
 public class ReguInfRecordActivity extends AppCompatActivity {
@@ -44,12 +38,16 @@ public class ReguInfRecordActivity extends AppCompatActivity {
     private String reguResult=null;
     private String reguDate=null;
     private Chainsql c = new Chainsql();
+    private String address=null;
+    private String secret=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regu_inf_record);
-
+        Intent intent=getIntent();
+        address=intent.getStringExtra("address");
+        secret=intent.getStringExtra("secret");
         editTextId=findViewById(R.id.editText_id);
         btnScan=findViewById(R.id.imageButton_scan);
         editTextReguName=findViewById(R.id.editText_regu_name);
@@ -123,8 +121,6 @@ public class ReguInfRecordActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address="zL36kWKGdqx9fXK4dzVc95ErriGuCQng5z";
-                String secret="xnejoG6irLTUgNgELJM5Y5ipsSwDT";
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
@@ -151,7 +147,7 @@ public class ReguInfRecordActivity extends AppCompatActivity {
                         String manuNum=obj.getJSONArray("lines")
                                 .getJSONObject(0).getString("ManufacturerNum");
                         JSONObject obj1 = c.table(table).get(c.array(str1)).update(str2).submit(Submit.SyncCond.db_success);
-                        c.use("zL36kWKGdqx9fXK4dzVc95ErriGuCQng5z");
+                        c.use(address);
                         // 向表sTableName中插入一条记录.
                         String record="{id:"+ idregu +", 'WorkerNum':"+nameregu
                                 +",'ProductTypeNum':'"+proTypeNum+"','ProductName':'"+proName

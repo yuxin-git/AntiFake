@@ -19,18 +19,28 @@ public class ManufacturerMainActivity extends AppCompatActivity {
     private ImageButton btn_inventory=null;
     private ImageButton btn_search=null;
 
+    private String address=null;
+    private String secret=null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manufacturer_main);
+        //获取账户地址及密钥
+        Intent intent=getIntent();
+        address=intent.getStringExtra("address");
+        secret=intent.getStringExtra("secret");
 
         btn_record=findViewById(R.id.imageButton_manu_record);
         btn_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(ManufacturerMainActivity.this, ManuInfRecordActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("address", address);
+                bundle.putString("secret",secret);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -40,6 +50,10 @@ public class ManufacturerMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(ManufacturerMainActivity.this, ManuOutwarehouseActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("address", address);
+                bundle.putString("secret",secret);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -49,6 +63,10 @@ public class ManufacturerMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(ManufacturerMainActivity.this, ManuInventorySearchActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("address", address);
+                bundle.putString("secret",secret);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

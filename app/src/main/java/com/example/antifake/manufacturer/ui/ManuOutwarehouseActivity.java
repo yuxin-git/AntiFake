@@ -39,10 +39,17 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
     private String deNum;
     private Chainsql c = new Chainsql();
 
+    private String address=null;
+    private String secret=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manu_outwarehouse);
+        Intent intent=getIntent();
+        address=intent.getStringExtra("address");
+        secret=intent.getStringExtra("secret");
+
         editTextOutId=findViewById(R.id.editText_manu_id_red);
         editTextOutDeNum=findViewById(R.id.editText_manu_red_denum);
         btnOutOk=findViewById(R.id.button_out_ok);
@@ -100,12 +107,10 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address="zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf";
-                String secret="xp1vcANddqbBhbfEr8i624pXcA5B4";
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address,secret);
-                String sTableName = "M001";
+                String sTableName = "M001"; //待完善，通过查询address_list获取
                 String searchid="{'id': "+id+"}";
                 String update="{'DeliveryState':'1','DealerNum':"+deNum+"}";
                 List<String> arr = Util.array(searchid);

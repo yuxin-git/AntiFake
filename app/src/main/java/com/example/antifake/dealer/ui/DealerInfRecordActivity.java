@@ -26,30 +26,40 @@ import org.json.JSONObject;
 
 import java.util.logging.Level;
 
-public class DealerInfRecordOfflineActivity extends AppCompatActivity {
+public class DealerInfRecordActivity extends AppCompatActivity {
     private EditText editTextId=null;
     private ImageButton btnScan=null;
-    private EditText editTextSaleName=null;
+    private EditText editTextSaleType=null;
     private EditText editTextCusTel=null;
+    private EditText editTextCusAdd=null;
+    private EditText editTextdeliNum=null;
     private EditText editTextCusName=null;
     private Button btnReOk;
     private Button btnReCancel;
     private Integer id;
-    private String saleName;
+    private String saleType;
     private String cusTel;
     private String cusName;
+    private String cusAdd;
+    private String deliveryNum;
     private String deDate;
     private Chainsql c = new Chainsql();
+    private String address=null;
+    private String secret=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dealer_inf_record_offline);
-
+        setContentView(R.layout.activity_dealer_inf_record);
+        Intent intent=getIntent();
+        address=intent.getStringExtra("address");
+        secret=intent.getStringExtra("secret");
         editTextId=findViewById(R.id.editText_id);
-        editTextSaleName=findViewById(R.id.editText_sale_add);
+        editTextSaleType=findViewById(R.id.editText_sale_type);
         editTextCusTel=findViewById(R.id.editText_cus_tel);
         editTextCusName=findViewById(R.id.editText_cus_name);
+        editTextCusAdd=findViewById(R.id.editText_cus_add);
+        editTextdeliNum=findViewById(R.id.editText_delivery_num);
         btnReOk=findViewById(R.id.button_dealer_off_record);
         btnReCancel=findViewById(R.id.button_dealer_off_cancel);
 
@@ -57,7 +67,7 @@ public class DealerInfRecordOfflineActivity extends AppCompatActivity {
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentIntegrator intentIntegrator = new IntentIntegrator(DealerInfRecordOfflineActivity.this);
+                IntentIntegrator intentIntegrator = new IntentIntegrator(DealerInfRecordActivity.this);
                 intentIntegrator.setBeepEnabled(true);
                 /*设置启动我们自定义的扫描活动，若不设置，将启动默认活动*/
                 intentIntegrator.setCaptureActivity(ScanActivity.class);
@@ -67,37 +77,39 @@ public class DealerInfRecordOfflineActivity extends AppCompatActivity {
         btnReOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saleType = editTextSaleType.getText().toString();
                 cusName= editTextCusName.getText().toString();
                 cusTel= editTextCusTel.getText().toString();
-                saleName= editTextSaleName.getText().toString();
+                cusAdd=editTextCusAdd.getText().toString();
+                deliveryNum=editTextdeliNum.getText().toString();
                 id= Integer.valueOf(editTextId.getText().toString());
                 Handler handler= new Handler() {
                     public void handleMessage(Message msg){
                         if(msg.what==0) {
-                            Toast.makeText(DealerInfRecordOfflineActivity.this,
+                            Toast.makeText(DealerInfRecordActivity.this,
                                     "该ID未被授权，登记失败！", Toast.LENGTH_LONG).show();
                         }
                         else if(msg.what==1){
-                            Toast.makeText(DealerInfRecordOfflineActivity.this,
+                            Toast.makeText(DealerInfRecordActivity.this,
                                     "登记成功！", Toast.LENGTH_LONG).show();
                         }
                         else if(msg.what==2){
-                            Toast.makeText(DealerInfRecordOfflineActivity.this,
+                            Toast.makeText(DealerInfRecordActivity.this,
                                     "该ID已被登记，登记失败！", Toast.LENGTH_LONG).show();
                         }
-                            DealerInfRecordOfflineActivity.this.finish();
+                            DealerInfRecordActivity.this.finish();
                     };
 
                 };
                 currentDate cDate=new currentDate();
                 deDate=cDate.getcurrentDate();
-                deOffInsert(handler,id,cusName,cusTel,saleName,deDate);
+                deOffInsert(handler,id,saleType,cusName,cusTel,cusAdd,deliveryNum,deDate);
             }
         });
         btnReCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DealerInfRecordOfflineActivity.this.finish();
+                DealerInfRecordActivity.this.finish();
             }
         });
 
@@ -118,13 +130,13 @@ public class DealerInfRecordOfflineActivity extends AppCompatActivity {
         }
     }
 
-    private void deOffInsert(final Handler handler,final int id,final String cusName,
-                              final String cusTel,final String saleName,final String deDate){
+    private void deOffInsert(final Handler handler,final int id,final String saleType,
+                             final String cusName, final String cusTel,
+                             final String cusAdd,final String deliveryNum,
+                             final String deDate){
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address = "zNoePXrfYvz8jvDiDNr3RNi4PwtBYhQxAR";
-                String secret = "xhpgTk8ALwWMugf921ak9eJdqtG4Q";
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
@@ -144,13 +156,13 @@ public class DealerInfRecordOfflineActivity extends AppCompatActivity {
                         String proName=obj.getJSONArray("lines")
                                 .getJSONObject(0).getString("ProductName");
                         c.table(table).get(c.array(str1)).update(str2).submit(Submit.SyncCond.db_success);
-                        c.use("zNoePXrfYvz8jvDiDNr3RNi4PwtBYhQxAR");
+                        c.use(address);
                         // 向表sTableName中插入一条记录.
                         String record = "{ID:" + id + ",'SaleState':'1','SaleDate':'" + deDate
                                 +"','ProductTypeNum':'"+proTypeNum+"','ProductName':'"+proName
-                                + "','SaleType':'1','CustomerName':'" + cusName
+                                + "','SaleType':'"+saleType+"','CustomerName':'" + cusName
                                 + "','CustomerTel':'" + cusTel + "','DealerNum':'" + sTableName
-                                + "','SalePlaceName':'" + saleName + "'}";
+                                + "','DeliveryNum':'" + deliveryNum + "','CustomerAdd':'" + cusAdd + "'}";
                         JSONObject obj2 = c.table(sTableName).insert(c.array(record))
                                 .submit(Submit.SyncCond.db_success);
                         if(obj2.has("error_message")){

@@ -38,6 +38,8 @@ public class PlaceholderFragment extends Fragment {
     private PageViewModel pageViewModel;
 
     private Button btn=null;
+    //方便测试使用
+    private Button btnTest=null;
 
     private EditText editTextAddress;
     private EditText editTextSecret;
@@ -79,9 +81,37 @@ public class PlaceholderFragment extends Fragment {
                 textView.setText(s);
             }
         });
-
         editTextAddress=root.findViewById(R.id.editText_address);
         editTextSecret=root.findViewById(R.id.editText_secret);
+        //方便测试使用
+        btnTest=root.findViewById(R.id.button_test_add);
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int atest=getArguments().getInt(ARG_SECTION_NUMBER);
+                switch (atest) {
+                    case 1:
+                        editTextAddress.setText("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
+                        editTextSecret.setText("xp1kUTT42HcwEWFxH9kkg6BGd1VBE");
+                        break;
+                    case 2:
+                        editTextAddress.setText("zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf");
+                        editTextSecret.setText("xp1vcANddqbBhbfEr8i624pXcA5B4");
+                        break;
+                    case 3:
+                        editTextAddress.setText("zNoePXrfYvz8jvDiDNr3RNi4PwtBYhQxAR");
+                        editTextSecret.setText("xhpgTk8ALwWMugf921ak9eJdqtG4Q");
+                        break;
+                    case 4:
+                        editTextAddress.setText("zL36kWKGdqx9fXK4dzVc95ErriGuCQng5z");
+                        editTextSecret.setText("xnejoG6irLTUgNgELJM5Y5ipsSwDT");
+                        break;
+                }
+            }
+        });
+
+
+
         btn= root.findViewById(R.id.button_enter);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,78 +121,42 @@ public class PlaceholderFragment extends Fragment {
                     case 1:
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
-                        //方便测试
-                        //address="z4kMq1EHxR8qWMNcz37ZgWeVuCSX5B2dJv";
-                        //secret="xn9v4PSgmBUog6aJqi87JkxaNDvEp";
-/*
-                        c.connect(String.valueOf(R.string.severIP_1));
-                        c.connection.client.logger.setLevel(Level.SEVERE);
-                        c.as(address,secret);
-
-
-                        address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
-                        secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
-                        c.connect(getString(R.string.severIP_1));
-                        c.connection.client.logger.setLevel(Level.SEVERE);
-                        c.as(address,secret);
-
-                        String sTableName = "commodity_infor";
-                        JSONObject obj1  = c.table(sTableName).get(c.array("{'ProductTypeNum': '400'}")).submit();
-
-                        System.out.println(obj1);
-
-*/
-
-
                         Intent intent1=new Intent(getActivity(),BrandMainActivity.class);
+                        Bundle bundle1=new Bundle();
+                        bundle1.putString("address", address);
+                        bundle1.putString("secret",secret);
+                        intent1.putExtras(bundle1);
                         startActivity(intent1);
+
                         break;
                     case 2://生产商
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
-/*
-                        //方便测试
-                        address="zKhdUEXNWMYG3uEquQkhGvYM3mZRGqYqNf";
-                        secret="xp1vcANddqbBhbfEr8i624pXcA5B4";
-
-                        c.connect(getString(R.string.severIP_2));
-                        c.connection.client.logger.setLevel(Level.SEVERE);
-                        c.as(address,secret);
-
- */
                         Intent intent2=new Intent(getActivity(), ManufacturerMainActivity.class);
+                        Bundle bundle2=new Bundle();
+                        bundle2.putString("address", address);
+                        bundle2.putString("secret",secret);
+                        intent2.putExtras(bundle2);
                         startActivity(intent2);
                         break;
                     case 3:
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
-/*
-                        //方便测试
-                        address="zwAkav6CJtdw2ZfoJXNgZUcWevnD1W16mf";
-                        secret="xxdBJurFvoBrKabnvpRX7nCvfcTyC";
-
-                        c.connect(getString(R.string.severIP_1));
-                        c.connection.client.logger.setLevel(Level.SEVERE);
-                        c.as(address,secret);
-
- */
                         Intent intent3=new Intent(getActivity(), DealerMainActivity.class);
+                        Bundle bundle3=new Bundle();
+                        bundle3.putString("address", address);
+                        bundle3.putString("secret",secret);
+                        intent3.putExtras(bundle3);
                         startActivity(intent3);
                         break;
                     case 4:
                         address=editTextAddress.getText().toString();
                         secret=editTextSecret.getText().toString();
-/*
-                        //方便测试
-                        address="zGWnvpDQ95poA5iwjswcxiiefNBouezZ4k";
-                        secret="xxnrU59HkC6ie5SndrcTJ2acXsnVR";
-
-                        c.connect(getString(R.string.severIP_2));
-                        c.connection.client.logger.setLevel(Level.SEVERE);
-                        c.as(address,secret);
-
- */
                         Intent intent4=new Intent(getActivity(), RegulatorMainActivity.class);
+                        Bundle bundle4=new Bundle();
+                        bundle4.putString("address", address);
+                        bundle4.putString("secret",secret);
+                        intent4.putExtras(bundle4);
                         startActivity(intent4);
                         break;
 

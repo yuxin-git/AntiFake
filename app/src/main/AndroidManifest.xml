@@ -19,9 +19,8 @@
         <activity android:name=".qrscan.ScanActivity" />
         <activity android:name=".regulator.ui.ReguInfRecordActivity" />
         <activity android:name=".regulator.RegulatorMainActivity" />
-        <activity android:name=".dealer.ui.DealerInfRecordOfflineActivity" />
+        <activity android:name=".dealer.ui.DealerInfRecordActivity" />
         <activity android:name=".dealer.ui.DealerInventorySearchActivity" />
-        <activity android:name=".dealer.ui.DealerInfRecordInetActivity" />
         <activity android:name=".manufacturer.ui.ManuInventorySearchActivity" />
         <activity android:name=".manufacturer.ui.ManuInfRecordActivity" />
         <activity android:name=".brand.ui.BrandDeallistSearchActivity" />

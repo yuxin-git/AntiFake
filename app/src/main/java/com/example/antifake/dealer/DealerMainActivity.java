@@ -9,34 +9,34 @@ import android.widget.ImageButton;
 
 import com.example.antifake.R;
 import com.example.antifake.SearchInfomationActivity;
-import com.example.antifake.dealer.ui.DealerInfRecordInetActivity;
-import com.example.antifake.dealer.ui.DealerInfRecordOfflineActivity;
+import com.example.antifake.dealer.ui.DealerInfRecordActivity;
 import com.example.antifake.dealer.ui.DealerInventorySearchActivity;
 
 public class DealerMainActivity extends AppCompatActivity {
-    private ImageButton btn_record_inet=null;
-    private ImageButton btn_record_off=null;
+    private ImageButton btn_record=null;
     private ImageButton btn_inventory=null;
     private ImageButton btn_search=null;
+
+    private String address=null;
+    private String secret=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_main);
+        Intent intent=getIntent();
+        address=intent.getStringExtra("address");
+        secret=intent.getStringExtra("secret");
 
-        btn_record_inet=findViewById(R.id.imageButton_dealer_record_inet);
-        btn_record_inet.setOnClickListener(new View.OnClickListener() {
+        btn_record=findViewById(R.id.imageButton_dealer_record);
+        btn_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(DealerMainActivity.this, DealerInfRecordInetActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btn_record_off=findViewById(R.id.imageButton_dealer_record_offline);
-        btn_record_off.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(DealerMainActivity.this, DealerInfRecordOfflineActivity.class);
+                Intent intent=new Intent(DealerMainActivity.this, DealerInfRecordActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("address", address);
+                bundle.putString("secret",secret);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -46,6 +46,10 @@ public class DealerMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(DealerMainActivity.this, DealerInventorySearchActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("address", address);
+                bundle.putString("secret",secret);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
