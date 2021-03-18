@@ -3,6 +3,7 @@ package com.example.antifake.manufacturer.ui;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +15,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.antifake.R;
-import com.example.antifake.currentDate;
+import com.example.antifake.funClass.HashOperation;
+import com.example.antifake.funClass.currentDate;
 import com.example.antifake.qrscan.ScanActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -63,7 +65,7 @@ public class ManuInfRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 id= Integer.valueOf(editTextManuRedId.getText().toString());
-                Handler handler= new Handler() {
+                @SuppressLint("HandlerLeak") Handler handler= new Handler() {
                     public void handleMessage(Message msg){
                         if(msg.what==0) {
                             Toast.makeText(ManuInfRecordActivity.this,
@@ -72,6 +74,19 @@ public class ManuInfRecordActivity extends AppCompatActivity {
                         else if(msg.what==1){
                             Toast.makeText(ManuInfRecordActivity.this,
                                     "入库成功！", Toast.LENGTH_LONG).show();
+                            int ledIndex= 0;
+                            try {
+                                ledIndex = c.getLedgerVersion()
+                                        .getInt("ledger_current_index")-1;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            HashOperation hash=new HashOperation();
+                            hash.setAddress(address);
+                            hash.setSecret(secret);
+                            hash.record(id,1,ledIndex);
+
+
                         }
                         ManuInfRecordActivity.this.finish();
                     };
@@ -155,5 +170,7 @@ public class ManuInfRecordActivity extends AppCompatActivity {
             }
         }).start();
     }
+
+
 
 }

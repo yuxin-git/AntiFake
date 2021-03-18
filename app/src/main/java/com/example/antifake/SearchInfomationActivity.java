@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.antifake.funClass.HashOperation;
 import com.example.antifake.qrscan.ScanActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -101,6 +102,11 @@ public class SearchInfomationActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 //溯源结果
+
+                                                //测试：查询区块信息，待完善
+                                                //HashOperation h=new HashOperation();
+                                                //JSONObject testb=h.getManuLedgerInfor(id);
+
                                                 String result="\n----------------------------------------------------------"
                                                         +"\n商品ID："+id
                                                         +"\n商品名称："+proName

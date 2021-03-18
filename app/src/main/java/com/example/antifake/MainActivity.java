@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
  */
-
+/*
                 //操作二：创建经销商表项
                 String address = "zNoePXrfYvz8jvDiDNr3RNi4PwtBYhQxAR";
                 String secret = "xhpgTk8ALwWMugf921ak9eJdqtG4Q";
@@ -121,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
+ */
 
 
 /*
@@ -193,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-/*
+
                 //操作五：创建品牌商表项(总表)
                 String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
                 String secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
@@ -207,9 +209,12 @@ public class MainActivity extends AppCompatActivity {
                         "{'field':'ProductName','type':'varchar','length':50,'default':null}",
                         "{'field':'ManufacturerNum','type':'varchar','length':20}",
                         "{'field':'DealerNum','type':'varchar','length':20}",
-                        "{'field':'RegulatorNum','type':'varchar','length':20}"),
+                        "{'field':'RegulatorNum','type':'varchar','length':20}",
+                        "{'field':'ManuLedger','type':'int','length':20}",
+                        "{'field':'DealerLedger','type':'int','length':20}",
+                        "{'field':'ReguLedger','type':'int','length':20}"),
                         false)
-                        .submit(SyncCond.db_success);
+                        .submit(Submit.SyncCond.db_success);
 
                 if (obj.has("error_message")) {
                     System.out.println(obj);
@@ -221,7 +226,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
- */
+
+
+
 /*
                 //操作六：创建品牌商表项(经销商列表)
                 String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";

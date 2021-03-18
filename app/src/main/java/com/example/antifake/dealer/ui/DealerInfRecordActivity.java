@@ -14,7 +14,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.antifake.R;
-import com.example.antifake.currentDate;
+import com.example.antifake.funClass.HashOperation;
+import com.example.antifake.funClass.currentDate;
 import com.example.antifake.qrscan.ScanActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -92,6 +93,17 @@ public class DealerInfRecordActivity extends AppCompatActivity {
                         else if(msg.what==1){
                             Toast.makeText(DealerInfRecordActivity.this,
                                     "登记成功！", Toast.LENGTH_LONG).show();
+                            int ledIndex= 0;
+                            try {
+                                ledIndex = c.getLedgerVersion()
+                                        .getInt("ledger_current_index")-1;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            HashOperation hash=new HashOperation();
+                            hash.setAddress(address);
+                            hash.setSecret(secret);
+                            hash.record(id,2,ledIndex);
                         }
                         else if(msg.what==2){
                             Toast.makeText(DealerInfRecordActivity.this,
