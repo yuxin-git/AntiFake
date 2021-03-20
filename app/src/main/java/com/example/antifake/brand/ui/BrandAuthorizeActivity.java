@@ -10,9 +10,13 @@ import android.widget.ImageButton;
 import com.example.antifake.R;
 import com.example.antifake.brand.BrandMainActivity;
 import com.example.antifake.brand.ui.auth.BrandAuthManuActivity;
+import com.example.antifake.brand.ui.auth.BrandAuthQualifyActivity;
+import com.example.antifake.brand.ui.auth.BrandComAddActivity;
 
 public class BrandAuthorizeActivity extends AppCompatActivity {
-    private ImageButton btnAuth;
+    private ImageButton btnAuthManu;
+    private ImageButton btnAuthQuali;
+    private ImageButton btnAuthComAdd;
     private String address=null;
     private String secret=null;
     @Override
@@ -23,8 +27,8 @@ public class BrandAuthorizeActivity extends AppCompatActivity {
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
 
-        btnAuth=findViewById(R.id.imageButton_auth_manu);
-        btnAuth.setOnClickListener(new View.OnClickListener() {
+        btnAuthManu=findViewById(R.id.imageButton_auth_manu);
+        btnAuthManu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(BrandAuthorizeActivity.this, BrandAuthManuActivity.class);
@@ -35,5 +39,32 @@ public class BrandAuthorizeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnAuthQuali=findViewById(R.id.imageButton_auth_qual);
+        btnAuthQuali.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(BrandAuthorizeActivity.this, BrandAuthQualifyActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("address", address);
+                bundle.putString("secret",secret);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        btnAuthComAdd=findViewById(R.id.imageButton_com_add);
+        btnAuthComAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(BrandAuthorizeActivity.this, BrandComAddActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("address", address);
+                bundle.putString("secret",secret);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
     }
 }

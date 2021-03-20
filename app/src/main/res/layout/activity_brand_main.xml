@@ -41,7 +41,7 @@
                 tools:ignore="VectorDrawableCompat" />
 
             <ImageButton
-                android:id="@+id/imageButton_brand_inventory"
+                android:id="@+id/imageButton_auth_qual"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

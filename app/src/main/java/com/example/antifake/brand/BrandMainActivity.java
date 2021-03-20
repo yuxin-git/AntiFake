@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 import com.example.antifake.R;
 import com.example.antifake.SearchInfomationActivity;
 import com.example.antifake.brand.ui.BrandAuthorizeActivity;
-import com.example.antifake.brand.ui.BrandDeallistSearchActivity;
 import com.example.antifake.brand.ui.BrandInventorySearchActivity;
 
 public class BrandMainActivity extends AppCompatActivity {
@@ -55,7 +54,7 @@ public class BrandMainActivity extends AppCompatActivity {
             }
         });
 
-        btn_inventory=findViewById(R.id.imageButton_brand_inventory);
+        btn_inventory=findViewById(R.id.imageButton_auth_qual);
         btn_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
