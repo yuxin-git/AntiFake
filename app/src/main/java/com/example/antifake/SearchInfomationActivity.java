@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.antifake.funClass.HashOperation;
 import com.example.antifake.qrscan.ScanActivity;
+import com.example.antifake.regulator.RegulatorMainActivity;
+import com.example.antifake.regulator.ui.ReguInfRecordActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.peersafe.chainsql.core.Chainsql;
@@ -34,20 +36,7 @@ public class SearchInfomationActivity extends AppCompatActivity {
     private Button btnSearch=null;
     private Integer id=null;
     public Chainsql cClient = new Chainsql();
-    //查询结果,定义为全局变量
-    private String proName=null;
-    private String manuName=null;
-    private String dealerName=null;
-    private String reguName=null;
-    private String productDate=null;
-    private String saleDate=null;
-    private String saleType=null;
-    private String cusName=null;
-    private String cusTel=null;
-    private String cusAdd=null;
-    private String deliveryNum=null;
-    private String reguDate=null;
-    private String reguResult=null;
+
 
 
 
@@ -103,29 +92,13 @@ public class SearchInfomationActivity extends AppCompatActivity {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 //溯源结果
 
-                                                //测试：查询区块信息，待完善
-                                                //HashOperation h=new HashOperation();
-                                                //JSONObject testb=h.getManuLedgerInfor(id);
+                                               Intent intent=new Intent(SearchInfomationActivity.this, SearchResultActivity.class);
+                                                Bundle bundle=new Bundle();
+                                                bundle.putString("id", String.valueOf(id));
+                                                intent.putExtras(bundle);
+                                                startActivity(intent);
 
-                                                String result="\n----------------------------------------------------------"
-                                                        +"\n商品ID："+id
-                                                        +"\n商品名称："+proName
-                                                        +"\n----------------------------------------------------------"
-                                                        +"\n生产商名称："+manuName
-                                                        +"\n生产日期："+productDate
-                                                        +"\n----------------------------------------------------------"
-                                                        +"\n质检机构名称："+reguName
-                                                        +"\n质检日期："+reguDate
-                                                        +"\n质检结果："+reguResult
-                                                        +"\n----------------------------------------------------------"
-                                                        +"\n经销商名称："+dealerName
-                                                        +"\n销售日期："+saleDate
-                                                        +"\n销售形式："+saleType
-                                                        +"\n顾客姓名："+cusName
-                                                        +"\n顾客电话："+cusTel
-                                                        +"\n顾客地址："+cusAdd
-                                                        +"\n物流单号："+deliveryNum
-                                                        +"\n----------------------------------------------------------";
+/*
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchInfomationActivity.this);
                                                 builder.setIcon(R.drawable.ic_search)
                                                         .setTitle("防伪溯源结果")
@@ -133,6 +106,8 @@ public class SearchInfomationActivity extends AppCompatActivity {
                                                         .setNegativeButton("确定", null);
                                                 builder.create().show();
 
+
+ */
                                             }
                                         });
                                 builder.create().show();
@@ -164,7 +139,7 @@ public class SearchInfomationActivity extends AppCompatActivity {
         }
     }
 
-    private void search(final Handler handler,final int id){
+    private void search(final Handler handler, final int id){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -179,17 +154,6 @@ public class SearchInfomationActivity extends AppCompatActivity {
                     if (obj.getString("lines").equals("[]")) {
                         handler.sendEmptyMessage(0);
                     } else {
-                        proName=obj.getJSONArray("lines")
-                                .getJSONObject(0).getString("ProductName");
-                        String manuNum=obj.getJSONArray("lines")
-                                .getJSONObject(0).getString("ManufacturerNum");
-                        queryManuInfor(id,manuNum);
-                        String dealerNum=obj.getJSONArray("lines")
-                                .getJSONObject(0).getString("DealerNum");
-                        queryDealerInfor(id,dealerNum);
-                        String reguNum=obj.getJSONArray("lines")
-                                .getJSONObject(0).getString("RegulatorNum");
-                        queryReguInfor(id,reguNum);
                         handler.sendEmptyMessage(1);
 
                     }
@@ -199,103 +163,6 @@ public class SearchInfomationActivity extends AppCompatActivity {
 
             }
         }).start();
-    }
-
-    //查询生产商相关信息
-    private void queryManuInfor(final int id,final String manuNum){
-        //查找品牌商的账户地址信息表，查询出对应生产商的名称及账户地址
-        cClient.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
-        String tableAccount="address_list";//账户信息表，查找生产商名称及账户地址
-        String str1 = "{'AccountId':'" + manuNum + "'}";
-        JSONObject obj1 = cClient.table(tableAccount).get(cClient.array(str1)).submit();
-        String manuAdd=null;
-        try {
-            manuName=obj1.getJSONArray("lines")
-                    .getJSONObject(0).getString("AccountName");
-            manuAdd=obj1.getJSONArray("lines")
-                    .getJSONObject(0).getString("AccountAdd");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        //查找对应生产商的生产信息表，查询出对应的生产日期
-        cClient.use(manuAdd);
-        String str2="{'id':" + id + "}";
-        JSONObject obj2 = cClient.table(manuNum).get(cClient.array(str2)).submit();
-        try {
-            productDate=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("ProductDate");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //查询经销商相关信息
-    private void queryDealerInfor(final int id,final String dealerNum){
-        //查找品牌商的账户地址信息表，查询出对应经销商的名称及账户地址
-        cClient.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
-        String tableAccount="address_list";//账户信息表，查找生产商名称及账户地址
-        String str1 = "{'AccountId':'" + dealerNum + "'}";
-        JSONObject obj1 = cClient.table(tableAccount).get(cClient.array(str1)).submit();
-        String dealerAdd=null;
-        try {
-            dealerName=obj1.getJSONArray("lines")
-                    .getJSONObject(0).getString("AccountName");
-            dealerAdd=obj1.getJSONArray("lines")
-                    .getJSONObject(0).getString("AccountAdd");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        //查找对应生产商的生产信息表，查询出对应的生产日期
-        cClient.use(dealerAdd);
-        String str2="{'id':" + id + "}";
-        JSONObject obj2 = cClient.table(dealerNum).get(cClient.array(str2)).submit();
-        try {
-            saleDate=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("SaleDate");
-            saleType=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("SaleType");
-            cusName=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("CustomerName");
-            cusTel=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("CustomerTel");
-            cusAdd=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("CustomerAdd");
-            deliveryNum=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("DeliveryNum");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //查询监管机构相关信息
-    private void queryReguInfor(final int id,final String reguNum){
-        //查找品牌商的账户地址信息表，查询出对应监管机构的名称及账户地址
-        cClient.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
-        String tableAccount="address_list";//账户信息表，查找生产商名称及账户地址
-        String str1 = "{'AccountId':'" + reguNum + "'}";
-        JSONObject obj1 = cClient.table(tableAccount).get(cClient.array(str1)).submit();
-        String reguAdd=null;
-        try {
-            reguName=obj1.getJSONArray("lines")
-                    .getJSONObject(0).getString("AccountName");
-            reguAdd=obj1.getJSONArray("lines")
-                    .getJSONObject(0).getString("AccountAdd");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        //查找对应监管机构的质检信息表，查询出对应质检日期和质检结果
-        cClient.use(reguAdd);
-        String str2="{'id':" + id + "}";
-        JSONObject obj2 = cClient.table(reguNum).get(cClient.array(str2)).submit();
-        try {
-            reguDate=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("RegulatorDate");
-            reguResult=obj2.getJSONArray("lines")
-                    .getJSONObject(0).getString("RegulatorResult");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
     }
 
 
