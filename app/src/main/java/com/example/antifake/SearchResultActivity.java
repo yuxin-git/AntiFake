@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +38,9 @@ public class SearchResultActivity extends AppCompatActivity {
     private TextView textViewManu=null;
     private TextView textViewRegu=null;
     private TextView textViewDealer=null;
+    private Button btnManu=null;
+    private Button btnRegu=null;
+    private Button btnDealer=null;
     //查询结果,定义为全局变量
     private String proName=null;
     private String manuName=null;
@@ -62,6 +67,9 @@ public class SearchResultActivity extends AppCompatActivity {
         textViewManu=findViewById(R.id.textView_manu);
         textViewRegu=findViewById(R.id.textView_regu);
         textViewDealer=findViewById(R.id.textView_dealer);
+        btnManu=findViewById(R.id.button_manu);
+        btnDealer=findViewById(R.id.button_de);
+        btnRegu=findViewById(R.id.button_regu);
         Handler handler= new Handler() {
             public void handleMessage(Message msg){
                 System.out.println("查询成功");
@@ -110,45 +118,27 @@ public class SearchResultActivity extends AppCompatActivity {
         };
         searchInfor(handler,id);
 
-        //测试：查询区块信息，待完善
-        HashOperation h=new HashOperation();
-        JSONObject testb = null;
-        JSONArray testa=new JSONArray();
-        Object testc=null;
-        try {
-            testb = h.getManuLedgerInfor(id).getJSONObject("ledger");
+        btnManu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHashInfor(id,1);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            testa=testb.getJSONArray("transactions");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            testc=testa.get(0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        String test=testc.toString();
-        JSONObject dd=cClient.getTransaction(test);
-        int timeStamp= 0;
-        try {
-            timeStamp = dd.getInt("date");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        long time= timeStamp+946684800;
-        String result1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time*1000);
-        System.out.println("10位数的时间戳（秒）-----》Date:"+result1);
-        Date date1 = new Date(time*1000);
-        System.out.println(date1);
-        long time3 = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse("2021-03-19 20:07:17",new ParsePosition(0)).getTime()/1000;
+            }
+        });
 
-        //区块高度，交易类型，完成时间，交易账户，交易hash
+        btnDealer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHashInfor(id,2);
+            }
+        });
 
-
+        btnRegu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHashInfor(id,3);
+            }
+        });
 
 
 
@@ -282,6 +272,57 @@ public class SearchResultActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    private void showHashInfor(final int inforId,final int type){
+        HashOperation h=new HashOperation();
+        String t= null;
+        try {
+            switch (type) {
+                case 1:
+                    t = h.getManuLedgerInfor(inforId).getJSONObject("ledger")
+                        .getJSONArray("transactions").get(0).toString();
+                break;
+                case 2:
+                    t = h.getDealerLedgerInfor(inforId).getJSONObject("ledger")
+                            .getJSONArray("transactions").get(0).toString();
+                    break;
+                case 3:
+                    t = h.getReguLedgerInfor(inforId).getJSONObject("ledger")
+                            .getJSONArray("transactions").get(0).toString();
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject tranInfor=cClient.getTransaction(t);
+        String textAccount=null;
+        String textTranType=null;
+        String textHash=null;
+        int ledgerNum=0;
+        int timeStamp=0;
+        try {
+            textAccount=tranInfor.getString("Account");     //交易账户
+            textTranType=tranInfor.getString("TransactionType"); //交易类型
+            textHash=tranInfor.getString("hash");        //交易hash
+            ledgerNum=tranInfor.getInt("ledger_index");   //区块高度
+            timeStamp = tranInfor.getInt("date");   //时间戳
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        long time= timeStamp+946684800;
+        String textTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time*1000);
+        String show="区块高度：\n"+ledgerNum
+                +"\n交易账户：\n"+textAccount
+                +"\n交易类型：\n"+textTranType
+                +"\n交易Hash：\n"+textHash
+                +"\n交易时间：\n"+textTime;
+        AlertDialog.Builder builder = new AlertDialog.Builder(SearchResultActivity.this);
+        builder.setIcon(R.drawable.ic_search)
+                .setTitle("区块详情信息")
+                .setMessage(show)
+                .setNegativeButton("确定", null);
+        builder.create().show();
     }
 
 }

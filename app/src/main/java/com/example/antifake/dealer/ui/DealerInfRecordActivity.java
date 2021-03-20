@@ -180,7 +180,7 @@ public class DealerInfRecordActivity extends AppCompatActivity {
                         if(obj2.has("error_message")){
                             String str = obj2.getString("error_message");
                             if(str.indexOf("Duplicate entry") != -1)
-                                handler.sendEmptyMessage(2);
+                                handler.sendEmptyMessage(1);
                             else
                                 handler.sendEmptyMessage(1);
                         }else {

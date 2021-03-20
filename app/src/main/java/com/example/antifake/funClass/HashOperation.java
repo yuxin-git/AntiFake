@@ -99,7 +99,7 @@ public class HashOperation {
         JSONObject obj = c.table("com_infor").get(c.array(str)).submit();
         try {
             int reguLed= Integer.parseInt(obj.getJSONArray("lines")
-                    .getJSONObject(0).getString("RugeLedger"));
+                    .getJSONObject(0).getString("ReguLedger"));
             result=c.getLedger(reguLed);
         } catch (JSONException e) {
             e.printStackTrace();
