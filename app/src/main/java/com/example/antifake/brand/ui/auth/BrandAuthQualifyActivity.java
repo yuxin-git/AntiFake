@@ -98,7 +98,7 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
                 c.as(address,secret);
                 String table="address_list";    //账户地址信息表
                 String record="{AccountId:'"+ acId +"', 'AccountType':'"+acType
-                        +"', 'AccountName':'"+acName +";, 'AccountAdd':'"+acAdd+"'}";
+                        +"', 'AccountName':'"+acName +"', 'AccountAdd':'"+acAdd+"'}";
                 JSONObject obj =  c.table(table).insert(c.array(record))
                         .submit(Submit.SyncCond.db_success);
                 if(obj.has("error_message")){
