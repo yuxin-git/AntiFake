@@ -38,7 +38,7 @@ public class BrandComAddActivity extends AppCompatActivity {
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
         editTextComTypeId=findViewById(R.id.editText_com_type);
-        editTextComName=findViewById(R.id.editText_com_name);
+        editTextComName=findViewById(R.id.editText_dealer_com_name);
 
         btnOk=findViewById(R.id.button_comadd_ok);
         btnCancel=findViewById(R.id.button_comadd_cancel);
