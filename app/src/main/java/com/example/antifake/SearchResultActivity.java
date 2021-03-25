@@ -313,10 +313,10 @@ public class SearchResultActivity extends AppCompatActivity {
         long time= timeStamp+946684800;
         String textTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time*1000);
         String show="区块高度：\n"+ledgerNum
-                +"\n交易账户：\n"+textAccount
-                +"\n交易类型：\n"+textTranType
-                +"\n交易Hash：\n"+textHash
-                +"\n交易时间：\n"+textTime;
+                +"\n\n交易账户：\n"+textAccount
+                +"\n\n交易类型：\n"+textTranType
+                +"\n\n交易Hash：\n"+textHash
+                +"\n\n交易时间：\n"+textTime;
         AlertDialog.Builder builder = new AlertDialog.Builder(SearchResultActivity.this);
         builder.setIcon(R.drawable.ic_search)
                 .setTitle("区块详情信息")
