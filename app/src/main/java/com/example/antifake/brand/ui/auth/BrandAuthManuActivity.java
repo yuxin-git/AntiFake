@@ -32,6 +32,7 @@ public class BrandAuthManuActivity extends AppCompatActivity {
     private EditText editTextIdBegin=null;
     private String address=null;
     private String secret=null;
+    private String userCert=null;
     private Button btnOk;
     private Button btnCancel;
     private String manuNum;
@@ -50,6 +51,7 @@ public class BrandAuthManuActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
+        userCert=intent.getStringExtra("userCert");
         editTextManuNum=findViewById(R.id.editText_manu_num);
         editTextProNum=findViewById(R.id.editText_pro_num);
         editTextQuality=findViewById(R.id.editText_quanlity);
@@ -108,6 +110,7 @@ public class BrandAuthManuActivity extends AppCompatActivity {
                 c.as(address,secret);
                 String str1 = "{'ProductTypeNum':" + proNum + "}";
                 c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
+                c.useCert(userCert);
                 String table="com_list";    //商品类型对应表
                 JSONObject objProtype = c.table(table).get(c.array(str1)).submit();
                 try {

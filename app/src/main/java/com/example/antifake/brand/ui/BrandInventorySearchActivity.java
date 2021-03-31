@@ -25,6 +25,7 @@ public class BrandInventorySearchActivity extends AppCompatActivity {
     private Chainsql c=new Chainsql();
     private String address=null;
     private String secret=null;
+    private String userCert=null;
     private EditText editTextManuId;
     private EditText editTextManuName;
     private EditText editTextDealerId;
@@ -50,7 +51,7 @@ public class BrandInventorySearchActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
-
+        userCert=intent.getStringExtra("userCert");
         editTextManuId=findViewById(R.id.editText_manu_id);
         editTextManuName=findViewById(R.id.editText_manu_name);
         editTextDealerId=findViewById(R.id.editText_de_id);
@@ -159,6 +160,7 @@ public class BrandInventorySearchActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
                 String sTableName = "address_list";
                 String str1 = "{'AccountId':'" + num + "'}";
@@ -184,6 +186,7 @@ public class BrandInventorySearchActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
                 String sTableName = "address_list";
                 String str1 = "{'AccountName':'" + name + "'}";
@@ -211,6 +214,7 @@ public class BrandInventorySearchActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 c.use(searchAdd);
                 String sTableName = mId;
                 //未出库
@@ -238,6 +242,7 @@ public class BrandInventorySearchActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 c.use(searchAdd);
                 String sTableName = dId;
                 //未售出

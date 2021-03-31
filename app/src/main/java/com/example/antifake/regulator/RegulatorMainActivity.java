@@ -19,6 +19,17 @@ public class RegulatorMainActivity extends AppCompatActivity {
 
     private String address=null;
     private String secret=null;
+    private String userCert="-----BEGIN CERTIFICATE-----\n" +
+            "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eXBMAoGCCqGSM49BAMCMGoxCzAJ\n" +
+            "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+            "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+            "cXEuY29tMB4XDTIxMDMzMTA3Mzc1MFoXDTIxMDQzMDA3Mzc1MFowRzELMAkGA1UE\n" +
+            "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+            "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEGmGfarNMoAm6\n" +
+            "cl8Syr4AsVj39JsG6HPxmf+eKKGCyoY9ZnynEOzUkV9T03jdsahjawSMSp3kmEZa\n" +
+            "HoiWTczpuTAKBggqhkjOPQQDAgNIADBFAiAZDg+jKbyhpxE6hGZpY4o/oWA8PWvz\n" +
+            "sfSC03qfprRR7QIhALmI0KWRXAJ9f92io2Px+Pj+5R+moJai0EwpYBLdICJd\n" +
+            "-----END CERTIFICATE-----";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +46,7 @@ public class RegulatorMainActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
+                bundle.putString("userCert",userCert);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

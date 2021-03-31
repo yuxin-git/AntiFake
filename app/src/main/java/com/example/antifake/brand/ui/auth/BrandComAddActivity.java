@@ -25,6 +25,7 @@ public class BrandComAddActivity extends AppCompatActivity {
     private Button btnCancel;
     private String address=null;
     private String secret=null;
+    private String userCert=null;
     private EditText editTextComTypeId;
     private EditText editTextComName;
     private Chainsql c=new Chainsql();
@@ -37,6 +38,7 @@ public class BrandComAddActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
+        userCert=intent.getStringExtra("userCert");
         editTextComTypeId=findViewById(R.id.editText_com_type);
         editTextComName=findViewById(R.id.editText_dealer_com_name);
 
@@ -78,6 +80,7 @@ public class BrandComAddActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address,secret);
+                c.useCert(userCert);
                 c.use(address);
                 String table="com_list";    //账户地址信息表
                 String record="{'ProductTypeNum':'"+ comId +"', 'ProductName':'"+comName+"'}";

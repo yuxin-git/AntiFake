@@ -19,6 +19,7 @@ public class BrandAuthorizeActivity extends AppCompatActivity {
     private ImageButton btnAuthComAdd;
     private String address=null;
     private String secret=null;
+    private String userCert=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class BrandAuthorizeActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
-
+        userCert=intent.getStringExtra("userCert");
         btnAuthManu=findViewById(R.id.imageButton_auth_manu);
         btnAuthManu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +36,7 @@ public class BrandAuthorizeActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
+                bundle.putString("userCert",userCert);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -48,6 +50,7 @@ public class BrandAuthorizeActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
+                bundle.putString("userCert",userCert);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -61,6 +64,7 @@ public class BrandAuthorizeActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
+                bundle.putString("userCert",userCert);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

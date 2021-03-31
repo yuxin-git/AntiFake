@@ -39,6 +39,7 @@ public class ManuInfRecordActivity extends AppCompatActivity {
     private Chainsql c = new Chainsql();
     private String address=null;
     private String secret=null;
+    private String userCert=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class ManuInfRecordActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
+        userCert=intent.getStringExtra("userCert");
         editTextManuRedId=findViewById(R.id.editText_manu_id_red);
         btnScan=findViewById(R.id.imageButton_scan);
         buttonManuRedOk=findViewById(R.id.button_manu_red_ok);
@@ -131,11 +133,13 @@ public class ManuInfRecordActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 String sTableName = "M001";
                 String table = "com_infor";
                 // 更新 id 等于 id 的记录
                 String str1 = "{'id':" + id + "}";
                 c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
+
                 JSONObject obj = c.table(table).get(c.array(str1)).submit();
                 try {
                     if (obj.getString("lines").equals("[]"))
@@ -148,6 +152,7 @@ public class ManuInfRecordActivity extends AppCompatActivity {
                         String proName=obj.getJSONArray("lines")
                                 .getJSONObject(0).getString("ProductName");
                         c.use(address);
+
                         // 向表sTableName中插入一条记录.
                         String record="{ID:"+ id +",'DeliveryState':0, 'ManufacturerNum':'" +sTableName
                                 +"','ProductTypeNum':'"+proTypeNum+"','ProductName':'"+proName

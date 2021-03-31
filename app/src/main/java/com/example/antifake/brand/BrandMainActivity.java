@@ -19,6 +19,17 @@ public class BrandMainActivity extends AppCompatActivity {
     private ImageButton btn_deallist=null;
     private String address=null;
     private String secret=null;
+    private String userCert="-----BEGIN CERTIFICATE-----\n" +
+            "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW+MAoGCCqGSM49BAMCMGoxCzAJ\n" +
+            "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+            "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+            "cXEuY29tMB4XDTIxMDMzMTAyNTMyMVoXDTIxMDQzMDAyNTMyMVowRzELMAkGA1UE\n" +
+            "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+            "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEgGj19CTwvx4J\n" +
+            "owoB6KV7uIQA3FUGCRucIIgxf1wSmCpH+PhMllmkfokie6X36wltaTEhq7gL2Q8T\n" +
+            "1VlLU/hMVTAKBggqhkjOPQQDAgNIADBFAiEA4dJsMbIIqPrKDSaWjXvCYL/ljMdM\n" +
+            "+wPDkNILytyOVMwCICzE7mI6VjUpSnzym3uND2huhFXj/qVNPTVGe1V3U0rL\n" +
+            "-----END CERTIFICATE-----";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,6 +47,7 @@ public class BrandMainActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
+                bundle.putString("userCert",userCert);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -49,6 +61,7 @@ public class BrandMainActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
+                bundle.putString("userCert",userCert);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -59,10 +72,6 @@ public class BrandMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(BrandMainActivity.this, BrandInventorySearchActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putString("address", address);
-                bundle.putString("secret",secret);
-                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

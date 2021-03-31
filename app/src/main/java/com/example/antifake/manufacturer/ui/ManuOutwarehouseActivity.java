@@ -41,6 +41,7 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
 
     private String address=null;
     private String secret=null;
+    private String userCert=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
-
+        userCert=intent.getStringExtra("userCert");
         editTextOutId=findViewById(R.id.editText_manu_id_red);
         editTextOutDeNum=findViewById(R.id.editText_manu_red_denum);
         btnOutOk=findViewById(R.id.button_out_ok);
@@ -110,6 +111,7 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address,secret);
+                c.useCert(userCert);
                 String sTableName = "M001"; //待完善，通过查询address_list获取
                 String searchid="{'id': "+id+"}";
                 String update="{'DeliveryState':'1','DealerNum':"+deNum+"}";

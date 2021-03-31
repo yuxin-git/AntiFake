@@ -25,6 +25,7 @@ public class ManuInventorySearchActivity extends AppCompatActivity {
     private Chainsql c=new Chainsql();
     private String address=null;
     private String secret=null;
+    private String userCert=null;
     private EditText editTextComId;
     private EditText editTextComName;
     private Button btnOk;
@@ -41,7 +42,7 @@ public class ManuInventorySearchActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
-
+        userCert=intent.getStringExtra("userCert");
         editTextComId=findViewById(R.id.editText_manu_com_id);
         editTextComName=findViewById(R.id.editText_manu_com_name);
         btnOk=findViewById(R.id.button_manu_inventory_search);
@@ -90,6 +91,7 @@ public class ManuInventorySearchActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 String sTableName = "M001";
                 //未售
                 String str1 = "{'ProductTypeNum':'" + num + "','DeliveryState':1}";
@@ -116,8 +118,8 @@ public class ManuInventorySearchActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 String sTableName = "D001";
-                //未售
                 //未售
                 String str1 = "{'ProductName':'" + name + "','DeliveryState':1}";
                 JSONObject obj1 = c.table(sTableName).get(c.array(str1)).submit();

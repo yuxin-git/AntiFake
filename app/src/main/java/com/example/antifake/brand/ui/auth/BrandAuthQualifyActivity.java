@@ -27,6 +27,7 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
     private Chainsql c=new Chainsql();
     private String address=null;
     private String secret=null;
+    private String userCert=null;
     private String accountType=null;
     private String accountId=null;
     private String accountAdd=null;
@@ -43,7 +44,7 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
-
+        userCert=intent.getStringExtra("userCert");
         Spinner textSpinner = findViewById(R.id.spinner_type);
         editTextAccountAdd=findViewById(R.id.editText_qualify_address);
         editTextAccountName=findViewById(R.id.editText_qualify_name);
@@ -96,6 +97,7 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address,secret);
+                c.useCert(userCert);
                 String table="address_list";    //账户地址信息表
                 String record="{AccountId:'"+ acId +"', 'AccountType':'"+acType
                         +"', 'AccountName':'"+acName +"', 'AccountAdd':'"+acAdd+"'}";

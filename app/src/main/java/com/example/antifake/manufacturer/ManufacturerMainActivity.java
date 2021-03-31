@@ -21,6 +21,17 @@ public class ManufacturerMainActivity extends AppCompatActivity {
 
     private String address=null;
     private String secret=null;
+    private String userCert="-----BEGIN CERTIFICATE-----\n" +
+            "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW/MAoGCCqGSM49BAMCMGoxCzAJ\n" +
+            "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+            "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+            "cXEuY29tMB4XDTIxMDMzMTA2NTQyOFoXDTIxMDQzMDA2NTQyOFowRzELMAkGA1UE\n" +
+            "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+            "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEIfWUWKqkl9D+\n" +
+            "viKoOce/AYNkp+vzVH1ORxlUroX93z8z5WSeadWvdPqnf2EX/m+FM/rlnwyN9CSl\n" +
+            "7PnvWJJTLTAKBggqhkjOPQQDAgNIADBFAiEA8g898rAH82ugiQm8qydgSrlaSV2f\n" +
+            "PlAOrGFa2+I9ancCIAo9R+Qb08MROvCG42vhhdidizd6sbRQ6j6iGIIjTyux\n" +
+            "-----END CERTIFICATE-----";
 
 
     @Override
@@ -40,6 +51,7 @@ public class ManufacturerMainActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
+                bundle.putString("userCert",userCert);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -53,6 +65,7 @@ public class ManufacturerMainActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
+                bundle.putString("userCert",userCert);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -66,6 +79,7 @@ public class ManufacturerMainActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
+                bundle.putString("userCert",userCert);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

@@ -26,6 +26,7 @@ public class DealerInventorySearchActivity extends AppCompatActivity {
     private Chainsql c=new Chainsql();
     private String address=null;
     private String secret=null;
+    private String userCert=null;
     private EditText editTextComId;
     private EditText editTextComName;
     private Button btnOk;
@@ -42,7 +43,7 @@ public class DealerInventorySearchActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
-
+        userCert=intent.getStringExtra("userCert");
         editTextComId=findViewById(R.id.editText_dealer_com_id);
         editTextComName=findViewById(R.id.editText_dealer_com_name);
         btnOk=findViewById(R.id.button_inventory_search);
@@ -91,6 +92,7 @@ public class DealerInventorySearchActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 String sTableName = "D001";
                 //未售
                 String str1 = "{'ProductTypeNum':'" + num + "','SaleState':1}";
@@ -117,6 +119,7 @@ public class DealerInventorySearchActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 String sTableName = "D001";
                 //未售
                 //未售

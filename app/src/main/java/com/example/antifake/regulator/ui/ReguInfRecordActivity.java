@@ -41,6 +41,7 @@ public class ReguInfRecordActivity extends AppCompatActivity {
     private Chainsql c = new Chainsql();
     private String address=null;
     private String secret=null;
+    private String userCert=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class ReguInfRecordActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
+        userCert=intent.getStringExtra("userCert");
         editTextId=findViewById(R.id.editText_id);
         btnScan=findViewById(R.id.imageButton_scan);
         editTextReguName=findViewById(R.id.editText_regu_name);
@@ -136,6 +138,7 @@ public class ReguInfRecordActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert(userCert);
                 String sTableName = "R001";
                 String table = "com_infor";
                 // 更新 id 等于 id 的记录
