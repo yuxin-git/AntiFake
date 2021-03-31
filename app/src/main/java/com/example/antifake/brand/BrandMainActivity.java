@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.antifake.CertPathActivity;
 import com.example.antifake.R;
 import com.example.antifake.SearchInfomationActivity;
 import com.example.antifake.brand.ui.BrandAuthorizeActivity;
@@ -53,11 +54,11 @@ public class BrandMainActivity extends AppCompatActivity {
             }
         });
 
-        btn_search=findViewById(R.id.imageButton_brand_search);
-        btn_search.setOnClickListener(new View.OnClickListener() {
+        btn_inventory=findViewById(R.id.imageButton_auth_qual);
+        btn_inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(BrandMainActivity.this, SearchInfomationActivity.class);
+                Intent intent=new Intent(BrandMainActivity.this, BrandInventorySearchActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putString("address", address);
                 bundle.putString("secret",secret);
@@ -67,16 +68,14 @@ public class BrandMainActivity extends AppCompatActivity {
             }
         });
 
-        btn_inventory=findViewById(R.id.imageButton_auth_qual);
-        btn_inventory.setOnClickListener(new View.OnClickListener() {
+        btn_search=findViewById(R.id.imageButton_brand_search);
+        btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(BrandMainActivity.this, BrandInventorySearchActivity.class);
+                Intent intent=new Intent(BrandMainActivity.this, CertPathActivity.class);
                 startActivity(intent);
             }
         });
-
-
 
     }
 }
