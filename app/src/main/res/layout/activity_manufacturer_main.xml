@@ -32,19 +32,19 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/imageButton_add_cert_manu"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_cert"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
                 android:id="@+id/imageButton_manu_record"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_edit"
-                tools:ignore="VectorDrawableCompat" />
-
-            <ImageButton
-                android:id="@+id/imageButton_manu_out"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_out_warehouse"
                 tools:ignore="VectorDrawableCompat" />
 
 
@@ -56,21 +56,21 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView41"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="添加CA证书"
+                android:textSize="20dp" />
+
+            <TextView
                 android:id="@+id/textView_add"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="商品生产入库登记"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/textView31"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="商品出库登记"
                 android:textSize="20dp" />
 
         </LinearLayout>
@@ -81,12 +81,52 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/imageButton_manu_out"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_out_warehouse"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
                 android:id="@+id/imageButton_manu_inventory"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_warehouse"
                 tools:ignore="VectorDrawableCompat" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="商品出库登记"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/textView_warehouse"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="库存查询"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="120dp"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/imageButton_manu_search"
@@ -98,18 +138,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
             android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView_warehouse"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="库存查询"
-                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/textView_search"

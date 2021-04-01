@@ -7,21 +7,39 @@
     tools:context=".CertPathActivity">
 
     <Button
-        android:id="@+id/bt"
+        android:id="@+id/button_cert_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="50dp"
-        android:text="Button"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="证书路径选择"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tx"
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_cert_select">
+
+        <TextView
+            android:id="@+id/textView_cert_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_cert_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt" />
+        android:layout_marginStart="60dp"
+        android:text="确定"
+        app:layout_constraintStart_toEndOf="@+id/button_cert_select"
+        app:layout_constraintTop_toTopOf="@+id/button_cert_select" />
 </androidx.constraintlayout.widget.ConstraintLayout>

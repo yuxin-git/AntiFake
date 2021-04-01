@@ -1,11 +1,14 @@
 package com.example.antifake.brand;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.antifake.CertPathActivity;
 import com.example.antifake.R;
@@ -17,20 +20,10 @@ public class BrandMainActivity extends AppCompatActivity {
     private ImageButton btn_auth=null;
     private ImageButton btn_search=null;
     private ImageButton btn_inventory=null;
-    private ImageButton btn_deallist=null;
+    private ImageButton btn_add_ca=null;
     private String address=null;
     private String secret=null;
-    private String userCert="-----BEGIN CERTIFICATE-----\n" +
-            "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW+MAoGCCqGSM49BAMCMGoxCzAJ\n" +
-            "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
-            "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
-            "cXEuY29tMB4XDTIxMDMzMTAyNTMyMVoXDTIxMDQzMDAyNTMyMVowRzELMAkGA1UE\n" +
-            "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
-            "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEgGj19CTwvx4J\n" +
-            "owoB6KV7uIQA3FUGCRucIIgxf1wSmCpH+PhMllmkfokie6X36wltaTEhq7gL2Q8T\n" +
-            "1VlLU/hMVTAKBggqhkjOPQQDAgNIADBFAiEA4dJsMbIIqPrKDSaWjXvCYL/ljMdM\n" +
-            "+wPDkNILytyOVMwCICzE7mI6VjUpSnzym3uND2huhFXj/qVNPTVGe1V3U0rL\n" +
-            "-----END CERTIFICATE-----";
+    private String userCert=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -39,6 +32,20 @@ public class BrandMainActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
+
+        btn_add_ca=findViewById(R.id.imageButton_add_ca);
+        btn_add_ca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(BrandMainActivity.this, CertPathActivity.class);
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 666);// 跳转并要求返回值
+            }
+        });
+
+
 
         btn_auth=findViewById(R.id.imageButton_authorize_manu);
         btn_auth.setOnClickListener(new View.OnClickListener() {
@@ -77,5 +84,14 @@ public class BrandMainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 666 && resultCode == Activity.RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            userCert = bundle.getString("userCert");
+        }
     }
 }

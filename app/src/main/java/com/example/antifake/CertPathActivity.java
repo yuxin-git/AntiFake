@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -28,7 +29,8 @@ import java.net.URISyntaxException;
 import com.example.antifake.funClass.UriPath;
 
 public class CertPathActivity extends AppCompatActivity {
-    private Button bt;
+    private Button btn_path;
+    private Button btn_ok;
     private TextView tx;
     private static final int FILE_SELECT_CODE = 0;
     private static final String TAG = "ChooseFile";
@@ -38,14 +40,17 @@ public class CertPathActivity extends AppCompatActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+    private String str=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cert_path);
-        bt = (Button) findViewById(R.id.bt);
-        tx = (TextView) findViewById(R.id.tx);
-        bt.setOnClickListener(new View.OnClickListener() {
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        btn_path = (Button) findViewById(R.id.button_cert_select);
+        tx = (TextView) findViewById(R.id.textView_cert_show);
+        btn_path.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Android6.0需要申请权限
@@ -60,9 +65,19 @@ public class CertPathActivity extends AppCompatActivity {
                     //已经申请过
                     showFileChooser();
                 }
-
             }
         });
+        btn_ok=findViewById(R.id.button_cert_ok);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bundle.putString("userCert", str);//添加要返回给页面1的数据
+                intent.putExtras(bundle);
+                CertPathActivity.this.setResult(Activity.RESULT_OK, intent);//返回页面1
+                CertPathActivity.this.finish();
+            }
+        });
+
     }
 
     //显示文件浏览器
@@ -91,10 +106,9 @@ public class CertPathActivity extends AppCompatActivity {
                         String path = uu.getRealPathFromUri_AboveApi19(getApplicationContext(), uri);
                         //String path = uri.getPath();
                         Log.e(TAG, "选择的文件路径: " + path);
-                        String s = loadFile(path);
-                        String str = readFile(path);
+                        str = readFile(path);
                         Log.e(TAG, "读取到的数据：" + str);
-                        tx.setText("文件中读取到的数据：\n" + str);
+                        tx.setText("证书内容：\n" + str);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -111,50 +125,6 @@ public class CertPathActivity extends AppCompatActivity {
                 showFileChooser();
                 break;
         }
-    }
-
-    //获取选择文件的路径
-    public String getPath(Uri uri) throws URISyntaxException {
-        if ("content".equalsIgnoreCase(uri.getScheme())) {
-            String[] projection = {"_data"};
-            Cursor cursor = null;
-            try {
-                cursor = getContentResolver().query(uri, projection, null, null, null);
-                int column_index = cursor.getColumnIndexOrThrow("_data");
-                if (cursor.moveToFirst()) {
-                    return cursor.getString(column_index);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
-        }
-        return null;
-    }
-
-    //根据路径及文件名加载文件数据
-    public String loadFile(String fileName) {
-        String data = "";
-        try {
-            File file = new File(fileName);
-            InputStream instream = new FileInputStream(file);
-            if (instream != null) {
-                InputStreamReader inputreader
-                        = new InputStreamReader(instream, "utf-8");
-                BufferedReader buffreader = new BufferedReader(inputreader);
-                String line = "";
-                while ((line = buffreader.readLine()) != null) {
-                    data += line;
-                }
-                instream.close();
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "****Load " + fileName + " Error****");
-            Log.e(TAG, "loadFile: " + e.toString());
-            e.printStackTrace();
-        }
-        return data;
     }
 
     public static String readFile(String filename) {

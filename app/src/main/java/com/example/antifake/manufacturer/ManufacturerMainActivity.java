@@ -1,19 +1,24 @@
 package com.example.antifake.manufacturer;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.antifake.CertPathActivity;
 import com.example.antifake.R;
 import com.example.antifake.SearchInfomationActivity;
+import com.example.antifake.dealer.DealerMainActivity;
 import com.example.antifake.manufacturer.ui.ManuInfRecordActivity;
 import com.example.antifake.manufacturer.ui.ManuInventorySearchActivity;
 import com.example.antifake.manufacturer.ui.ManuOutwarehouseActivity;
 
 public class ManufacturerMainActivity extends AppCompatActivity {
+    private ImageButton btn_add_cert=null;
     private ImageButton btn_record=null;
     private ImageButton btn_manuout=null;
     private ImageButton btn_inventory=null;
@@ -42,6 +47,18 @@ public class ManufacturerMainActivity extends AppCompatActivity {
         Intent intent=getIntent();
         address=intent.getStringExtra("address");
         secret=intent.getStringExtra("secret");
+
+        btn_add_cert=findViewById(R.id.imageButton_add_cert_manu);
+        btn_add_cert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ManufacturerMainActivity.this, CertPathActivity.class);
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 888);// 跳转并要求返回值
+            }
+        });
 
         btn_record=findViewById(R.id.imageButton_manu_record);
         btn_record.setOnClickListener(new View.OnClickListener() {
@@ -92,5 +109,14 @@ public class ManufacturerMainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 888 && resultCode == Activity.RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            userCert = bundle.getString("userCert");
+        }
     }
 }
