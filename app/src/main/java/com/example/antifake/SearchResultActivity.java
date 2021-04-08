@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class  SearchResultActivity extends AppCompatActivity {
     String result=null;
     private TextView textViewResult=null;
     public Chainsql cClient = new Chainsql();

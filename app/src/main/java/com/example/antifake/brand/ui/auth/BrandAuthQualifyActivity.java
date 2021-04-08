@@ -32,6 +32,7 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
     private String accountId=null;
     private String accountAdd=null;
     private String accountName=null;
+    private int accountLedger=0;
     private EditText editTextAccountId=null;
     private EditText editTextAccountAdd=null;
     private EditText editTextAccountName=null;
@@ -65,7 +66,11 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
                 accountId=editTextAccountId.getText().toString();
                 accountAdd=editTextAccountAdd.getText().toString();
                 accountName=editTextAccountName.getText().toString();
-
+                try {
+                    accountLedger = c.getLedgerVersion().getInt("ledger_current_index");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Handler handler= new Handler() {
                     public void handleMessage(Message msg){
                         if(msg.what==0) {
@@ -76,7 +81,7 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
                     };
 
                 };
-                insertQualify(handler,accountType,accountId,accountName,accountAdd);
+                insertQualify(handler,accountType,accountId,accountName,accountAdd,accountLedger);
 
             }
         });
@@ -89,8 +94,8 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
         });
     }
 
-    private void insertQualify(final Handler handler, final String acType,
-                               final String acId, final String acName, final String acAdd){
+    private void insertQualify(final Handler handler, final String acType, final String acId,
+                               final String acName, final String acAdd,final int acLedger){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -100,7 +105,8 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
                 c.useCert(userCert);
                 String table="address_list";    //账户地址信息表
                 String record="{AccountId:'"+ acId +"', 'AccountType':'"+acType
-                        +"', 'AccountName':'"+acName +"', 'AccountAdd':'"+acAdd+"'}";
+                        +"', 'AccountName':'"+acName +"', 'AccountAdd':'"+acAdd
+                        +"', 'AccountLedger':'"+acLedger+"'}";
                 JSONObject obj =  c.table(table).insert(c.array(record))
                         .submit(Submit.SyncCond.db_success);
                 if(obj.has("error_message")){
