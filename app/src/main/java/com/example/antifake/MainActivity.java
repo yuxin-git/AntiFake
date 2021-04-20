@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
 
     private void operation(Handler handler) {
@@ -76,6 +77,17 @@ public class MainActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_2));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(rootAddress,rootSecret);
+                c.useCert("-----BEGIN CERTIFICATE-----\n" +
+                "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW+MAoGCCqGSM49BAMCMGoxCzAJ\n" +
+                "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+                "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+                "cXEuY29tMB4XDTIxMDMzMTAyNTMyMVoXDTIxMDQzMDAyNTMyMVowRzELMAkGA1UE\n" +
+                "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+                "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEgGj19CTwvx4J\n" +
+                "owoB6KV7uIQA3FUGCRucIIgxf1wSmCpH+PhMllmkfokie6X36wltaTEhq7gL2Q8T\n" +
+                "1VlLU/hMVTAKBggqhkjOPQQDAgNIADBFAiEA4dJsMbIIqPrKDSaWjXvCYL/ljMdM\n" +
+                "+wPDkNILytyOVMwCICzE7mI6VjUpSnzym3uND2huhFXj/qVNPTVGe1V3U0rL\n" +
+                "-----END CERTIFICATE-----");
                 JSONObject obj = c.pay("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3","5000").submit(SyncCond.validate_success);
                 if(obj.has("error_message")){
                     try {
@@ -97,6 +109,17 @@ public class MainActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert("-----BEGIN CERTIFICATE-----\n" +
+                "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW+MAoGCCqGSM49BAMCMGoxCzAJ\n" +
+                "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+                "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+                "cXEuY29tMB4XDTIxMDMzMTAyNTMyMVoXDTIxMDQzMDAyNTMyMVowRzELMAkGA1UE\n" +
+                "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+                "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEgGj19CTwvx4J\n" +
+                "owoB6KV7uIQA3FUGCRucIIgxf1wSmCpH+PhMllmkfokie6X36wltaTEhq7gL2Q8T\n" +
+                "1VlLU/hMVTAKBggqhkjOPQQDAgNIADBFAiEA4dJsMbIIqPrKDSaWjXvCYL/ljMdM\n" +
+                "+wPDkNILytyOVMwCICzE7mI6VjUpSnzym3uND2huhFXj/qVNPTVGe1V3U0rL\n" +
+                "-----END CERTIFICATE-----");
                 JSONObject obj = c.createTable("D001", c.array(
                         "{'field':'id','type':'int','length':30,'PK':1,'NN':1,'UQ':1}",
                         "{'field':'ProductTypeNum','type':'int','length':20}",
@@ -133,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+
                 JSONObject obj = c.createTable("M001", c.array(
                         "{'field':'id','type':'int','length':30,'PK':1,'NN':1,'UQ':1}",
                         "{'field':'ProductTypeNum','type':'int','length':20}",
@@ -195,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+/*
                 //操作五：创建品牌商表项(总表)
                 String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
                 String secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
@@ -203,6 +227,17 @@ public class MainActivity extends AppCompatActivity {
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
+                c.useCert("-----BEGIN CERTIFICATE-----\n" +
+                        "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW+MAoGCCqGSM49BAMCMGoxCzAJ\n" +
+                        "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+                        "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+                        "cXEuY29tMB4XDTIxMDMzMTAyNTMyMVoXDTIxMDQzMDAyNTMyMVowRzELMAkGA1UE\n" +
+                        "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+                        "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEgGj19CTwvx4J\n" +
+                        "owoB6KV7uIQA3FUGCRucIIgxf1wSmCpH+PhMllmkfokie6X36wltaTEhq7gL2Q8T\n" +
+                        "1VlLU/hMVTAKBggqhkjOPQQDAgNIADBFAiEA4dJsMbIIqPrKDSaWjXvCYL/ljMdM\n" +
+                        "+wPDkNILytyOVMwCICzE7mI6VjUpSnzym3uND2huhFXj/qVNPTVGe1V3U0rL\n" +
+                        "-----END CERTIFICATE-----");
                 JSONObject obj = c.createTable("com_infor", c.array(
                         "{'field':'id','type':'int','length':30,'PK':1,'NN':1,'UQ':1}",
                         "{'field':'ProductTypeNum','type':'int','length':20}",
@@ -213,6 +248,48 @@ public class MainActivity extends AppCompatActivity {
                         "{'field':'ManuLedger','type':'int','length':20}",
                         "{'field':'DealerLedger','type':'int','length':20}",
                         "{'field':'ReguLedger','type':'int','length':20}"),
+                        false)
+                        .submit(Submit.SyncCond.db_success);
+                if (obj.has("error_message")) {
+                    System.out.println(obj);
+                } else {
+                    try {
+                        System.out.println("status:" + obj.getString("status"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+ */
+
+
+
+/*
+
+                //操作六：创建账户地址信息表
+                String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
+                String secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
+                Chainsql c = new Chainsql();
+                c.connect(getString(R.string.severIP_1));
+                c.connection.client.logger.setLevel(Level.SEVERE);
+                c.as(address, secret);
+                c.useCert("-----BEGIN CERTIFICATE-----\n" +
+                        "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW+MAoGCCqGSM49BAMCMGoxCzAJ\n" +
+                        "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+                        "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+                        "cXEuY29tMB4XDTIxMDMzMTAyNTMyMVoXDTIxMDQzMDAyNTMyMVowRzELMAkGA1UE\n" +
+                        "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+                        "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEgGj19CTwvx4J\n" +
+                        "owoB6KV7uIQA3FUGCRucIIgxf1wSmCpH+PhMllmkfokie6X36wltaTEhq7gL2Q8T\n" +
+                        "1VlLU/hMVTAKBggqhkjOPQQDAgNIADBFAiEA4dJsMbIIqPrKDSaWjXvCYL/ljMdM\n" +
+                        "+wPDkNILytyOVMwCICzE7mI6VjUpSnzym3uND2huhFXj/qVNPTVGe1V3U0rL\n" +
+                        "-----END CERTIFICATE-----");
+                JSONObject obj = c.createTable("address_list", c.array(
+                        "{'field':'AccountId','type':'varchar','length':20,'PK':1,'NN':1,'UQ':1}",
+                        "{'field':'AccountType','type':'varchar','length':5}",
+                        "{'field':'AccountAdd','type':'varchar','length':100}",
+                        "{'field':'AccountName','type':'varchar','length':70}",
+                        "{'field':'AccountLedger','type':'int','length':20}"),
                         false)
                         .submit(Submit.SyncCond.db_success);
 
@@ -226,94 +303,99 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
+ */
 
 
-
-/*
-                //操作六：创建品牌商表项(经销商列表)
+                /*
+                //操作七：创建商品种类对应表
                 String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
                 String secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
                 Chainsql c = new Chainsql();
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
-                JSONObject obj = c.createTable("dealer_list", c.array(
-                        "{'field':'DealerNum','type':'varchar','length':30,'PK':1,'NN':1,'UQ':1}",
-                        "{'field':'DealerAdd','type':'varchar','length':100}",
-                        "{'field':'DealerName','type':'varchar','length':50,'default':null}",
-                        "{'field':'Total','type':'int','length':20}",
-                        "{'field':'SaleOn','type':'int','length':20}",
-                        "{'field':'SaleOff','type':'int','length':20}"),
+                c.useCert("-----BEGIN CERTIFICATE-----\n" +
+                        "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW+MAoGCCqGSM49BAMCMGoxCzAJ\n" +
+                        "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+                        "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+                        "cXEuY29tMB4XDTIxMDMzMTAyNTMyMVoXDTIxMDQzMDAyNTMyMVowRzELMAkGA1UE\n" +
+                        "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+                        "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEgGj19CTwvx4J\n" +
+                        "owoB6KV7uIQA3FUGCRucIIgxf1wSmCpH+PhMllmkfokie6X36wltaTEhq7gL2Q8T\n" +
+                        "1VlLU/hMVTAKBggqhkjOPQQDAgNIADBFAiEA4dJsMbIIqPrKDSaWjXvCYL/ljMdM\n" +
+                        "+wPDkNILytyOVMwCICzE7mI6VjUpSnzym3uND2huhFXj/qVNPTVGe1V3U0rL\n" +
+                        "-----END CERTIFICATE-----");
+                JSONObject obj = c.createTable("com_list", c.array(
+                        "{'field':'ProductTypeNum','type':'int','length':20,'PK':1,'NN':1,'UQ':1}",
+                        "{'field':'ProductName','type':'varchar','length':100}"),
                         false)
                         .submit(SyncCond.db_success);
-
                 if (obj.has("error_message")) {
                     System.out.println(obj);
                 } else {
                     try {
                         System.out.println("status:" + obj.getString("status"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                 */
+/*
+                //操作八：删除账户信息表
+                String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
+                String secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
+                Chainsql c = new Chainsql();
+                c.connect(getString(R.string.severIP_1));
+                c.connection.client.logger.setLevel(Level.SEVERE);
+                c.as(address, secret);
+                c.useCert("-----BEGIN CERTIFICATE-----\n" +
+                        "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW+MAoGCCqGSM49BAMCMGoxCzAJ\n" +
+                        "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+                        "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+                        "cXEuY29tMB4XDTIxMDMzMTAyNTMyMVoXDTIxMDQzMDAyNTMyMVowRzELMAkGA1UE\n" +
+                        "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+                        "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEgGj19CTwvx4J\n" +
+                        "owoB6KV7uIQA3FUGCRucIIgxf1wSmCpH+PhMllmkfokie6X36wltaTEhq7gL2Q8T\n" +
+                        "1VlLU/hMVTAKBggqhkjOPQQDAgNIADBFAiEA4dJsMbIIqPrKDSaWjXvCYL/ljMdM\n" +
+                        "+wPDkNILytyOVMwCICzE7mI6VjUpSnzym3uND2huhFXj/qVNPTVGe1V3U0rL\n" +
+                        "-----END CERTIFICATE-----");
+                JSONObject obj = c.dropTable("address_list").submit(Submit.SyncCond.db_success);
+                if(obj.has("error_message")){
+                    System.out.println(obj);
+                }else {
+                    try {
+                        System.out.println( "status" + obj.getString("status"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
 
  */
-                /*
-                //操作七：创建品牌商表项(经销商列表)
                 String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
                 String secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
                 Chainsql c = new Chainsql();
                 c.connect(getString(R.string.severIP_1));
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
-                JSONObject obj = c.createTable("manu_list", c.array(
-                        "{'field':'ManufacturerNum','type':'varchar','length':30,'PK':1,'NN':1,'UQ':1}",
-                        "{'field':'ManufacturerAdd','type':'varchar','length':100}",
-                        "{'field':'ManufacturerName','type':'varchar','length':50,'default':null}",
-                        "{'field':'Total','type':'int','length':20}",
-                        "{'field':'DeliveryOn','type':'int','length':20}",
-                        "{'field':'DeliveryOff','type':'int','length':20}"),
-                        false)
-                        .submit(SyncCond.db_success);
-
-                if (obj.has("error_message")) {
-                    System.out.println(obj);
-                } else {
-                    try {
-                        System.out.println("status:" + obj.getString("status"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                 */
-                /*
-                //操作八：创建品牌商表项(监管机构列表)
-                String address="zEX33AirGeFUyY4H56viye5hp5J9WwKUv3";
-                String secret="xp1kUTT42HcwEWFxH9kkg6BGd1VBE";
-                Chainsql c = new Chainsql();
-                c.connect(getString(R.string.severIP_1));
-                c.connection.client.logger.setLevel(Level.SEVERE);
-                c.as(address, secret);
-                JSONObject obj = c.createTable("regu_list", c.array(
-                        "{'field':'RegulatorNum','type':'varchar','length':30,'PK':1,'NN':1,'UQ':1}",
-                        "{'field':'RegulatorAdd','type':'varchar','length':100}",
-                        "{'field':'RegulatorName','type':'varchar','length':50,'default':null}"),
-                        false)
-                        .submit(SyncCond.db_success);
-
-                if (obj.has("error_message")) {
-                    System.out.println(obj);
-                } else {
-                    try {
-                        System.out.println("status:" + obj.getString("status"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+                c.useCert("-----BEGIN CERTIFICATE-----\n" +
+                        "MIIBqTCCAU8CFGQ41AjfsOV17lzmuj/KYqug9eW+MAoGCCqGSM49BAMCMGoxCzAJ\n" +
+                        "BgNVBAYTAmMxMQowCAYDVQQIDAExMQowCAYDVQQHDAF5MQowCAYDVQQKDAF6MQow\n" +
+                        "CAYDVQQLDAF6MQowCAYDVQQDDAF6MR8wHQYJKoZIhvcNAQkBFhA0Mzc4NzM1NjZA\n" +
+                        "cXEuY29tMB4XDTIxMDMzMTAyNTMyMVoXDTIxMDQzMDAyNTMyMVowRzELMAkGA1UE\n" +
+                        "BhMCQ04xCzAJBgNVBAgMAkJKMQswCQYDVQQHDAJCSjERMA8GA1UECgwIUGVlcnNh\n" +
+                        "ZmUxCzAJBgNVBAMMAlJDMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEgGj19CTwvx4J\n" +
+                        "owoB6KV7uIQA3FUGCRucIIgxf1wSmCpH+PhMllmkfokie6X36wltaTEhq7gL2Q8T\n" +
+                        "1VlLU/hMVTAKBggqhkjOPQQDAgNIADBFAiEA4dJsMbIIqPrKDSaWjXvCYL/ljMdM\n" +
+                        "+wPDkNILytyOVMwCICzE7mI6VjUpSnzym3uND2huhFXj/qVNPTVGe1V3U0rL\n" +
+                        "-----END CERTIFICATE-----");
+                JSONObject obj = c.grant("address_list", "zpncip6ZUTrfqz3nSHpix4eQyMS4F1KM83"
+                        , "{select:true}")
+                        .submit(Submit.SyncCond.validate_success);
+                System.out.println("grant result:" + obj.toString());
 
 
-                 */
+
 
 
 

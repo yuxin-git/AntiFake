@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
 import java.util.logging.Level;
 
-public class SearchInfomationActivity extends AppCompatActivity {
+public class  SearchInfomationActivity extends AppCompatActivity {
 
     private EditText editTextId=null;
     private ImageButton btnScan=null;

@@ -67,7 +67,12 @@ public class BrandAuthQualifyActivity extends AppCompatActivity {
                 accountAdd=editTextAccountAdd.getText().toString();
                 accountName=editTextAccountName.getText().toString();
                 try {
-                    accountLedger = c.getLedgerVersion().getInt("ledger_current_index");
+                    c.connect(getString(R.string.severIP_1));
+                    c.connection.client.logger.setLevel(Level.SEVERE);
+                    c.as(address,secret);
+                    c.useCert(userCert);
+                    JSONObject a=c.getLedgerVersion();
+                    accountLedger = a.getInt("ledger_current_index");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
