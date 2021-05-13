@@ -2,7 +2,7 @@
 <resources>
     <string-array name="languages">
         <item>生产商</item>
-        <item>销售商</item>
+        <item>经销商</item>
         <item>监管机构</item>
     </string-array>
 </resources>

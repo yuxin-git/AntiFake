@@ -118,7 +118,21 @@ public class DealerComeinRecordActivity extends AppCompatActivity {
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
                 c.useCert(userCert);
-                String sTableName = "D001";
+                String sTableName = null;
+                //通过账户地址查询该经销商编号
+                c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
+                String strAdd = "{'AccountAdd':'" + address + "'}";
+                JSONObject objAdd = c.table("address_list").get(c.array(strAdd)).submit();
+                try {
+                    if (objAdd.getString("lines").equals("[]"))
+                        handler.sendEmptyMessage(3);
+                    else {
+                        sTableName = objAdd.getJSONArray("lines")
+                                .getJSONObject(0).getString("AccountId");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 String table = "com_infor";
                 // 更新 id 等于 id 的记录
                 String str1 = "{'id':" + id + "}";

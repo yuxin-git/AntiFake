@@ -112,7 +112,21 @@ public class ManuOutwarehouseActivity extends AppCompatActivity {
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address,secret);
                 c.useCert(userCert);
-                String sTableName = "M001"; //待完善，通过查询address_list获取
+                String sTableName = null;
+                //通过账户地址查询该生产商编号
+                c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
+                String strAdd = "{'AccountAdd':'" + address + "'}";
+                JSONObject objAdd = c.table("address_list").get(c.array(strAdd)).submit();
+                try {
+                    if (objAdd.getString("lines").equals("[]"))
+                        handler.sendEmptyMessage(3);
+                    else {
+                        sTableName = objAdd.getJSONArray("lines")
+                                .getJSONObject(0).getString("AccountId");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 String searchid="{'id': "+id+"}";
                 String update="{'DeliveryState':'1','DealerNum':"+deNum+"}";
                 List<String> arr = Util.array(searchid);

@@ -93,7 +93,21 @@ public class DealerInventorySearchActivity extends AppCompatActivity {
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
                 c.useCert(userCert);
-                String sTableName = "D001";
+                String sTableName = null;
+                //通过账户地址查询该经销商编号
+                c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
+                String strAdd = "{'AccountAdd':'" + address + "'}";
+                JSONObject objAdd = c.table("address_list").get(c.array(strAdd)).submit();
+                try {
+                    if (objAdd.getString("lines").equals("[]"))
+                        handler.sendEmptyMessage(3);
+                    else {
+                        sTableName = objAdd.getJSONArray("lines")
+                                .getJSONObject(0).getString("AccountId");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 //未售
                 String str1 = "{'ProductTypeNum':'" + num + "','SaleState':1}";
                 JSONObject obj1 = c.table(sTableName).get(c.array(str1)).submit();
@@ -120,8 +134,21 @@ public class DealerInventorySearchActivity extends AppCompatActivity {
                 c.connection.client.logger.setLevel(Level.SEVERE);
                 c.as(address, secret);
                 c.useCert(userCert);
-                String sTableName = "D001";
-                //未售
+                String sTableName = null;
+                //通过账户地址查询该经销商编号
+                c.use("zEX33AirGeFUyY4H56viye5hp5J9WwKUv3");
+                String strAdd = "{'AccountAdd':'" + address + "'}";
+                JSONObject objAdd = c.table("address_list").get(c.array(strAdd)).submit();
+                try {
+                    if (objAdd.getString("lines").equals("[]"))
+                        handler.sendEmptyMessage(3);
+                    else {
+                        sTableName = objAdd.getJSONArray("lines")
+                                .getJSONObject(0).getString("AccountId");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 //未售
                 String str1 = "{'ProductName':'" + name + "','SaleState':1}";
                 JSONObject obj1 = c.table(sTableName).get(c.array(str1)).submit();
